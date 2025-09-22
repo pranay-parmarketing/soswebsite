@@ -1,0 +1,15 @@
+.animated-container {
+  width: 100%;
+  overflow: hidden;
+  transition: var(--transition);
+  z-index: 1;
+  position: sticky;
+  top: 0;
+}
+.animated-container.hide {
+  opacity: 0;
+}
+.animated-container video {
+  width: 100%;
+  height: 100vh;
+}

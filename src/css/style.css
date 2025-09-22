@@ -1,0 +1,123 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  position: relative;
+  background: url(../images/background.webp) no-repeat center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+:root {
+  --transition: all 0.5s ease-in-out;
+}
+@font-face {
+  font-family: "regular";
+  src: url(../fonts/Poppins-Regular.ttf);
+}
+@font-face {
+  font-family: "bold";
+  src: url(../fonts/Poppins-Black.ttf);
+}
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+h1 {
+  font-family: "bold";
+  font-size: 26px;
+  color: #fff;
+  margin: 0;
+}
+h2 {
+  font-family: "bold";
+  font-size: 18px;
+  color: #fff;
+  margin: 0;
+}
+p,
+li {
+  font-family: "regular";
+  font-size: 14px;
+  margin: 0;
+  color: #fff !important;
+}
+ul {
+  margin-bottom: 0;
+}
+.button {
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  background: #ca2e25;
+  border-radius: 6px;
+  color: #fff;
+  font-family: "regular";
+  font-size: 14px;
+  text-transform: capitalize;
+}
+input,
+label {
+  font-size: 14px;
+  font-family: "regular";
+}
+.background {
+  background: #00000070;
+}
+.form-control,
+.form-select {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #fff !important;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: #fff !important;
+}
+.form-select option {
+  color: #000 !important;
+  font-family: "regular";
+}
+.form-floating label {
+  color: #fff !important;
+  font-family: "regular";
+}
+.input-flex {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+}
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: #ca2e25;
+}
+.accordion-item {
+  background: transparent !important;
+}
+.accordion-button {
+  box-shadow: none !important;
+  padding: 16px 8px !important;
+  color: #fff !important;
+  font-family: "regular";
+  background: #00000080 !important;
+}
+.accordion-button:not(.collapsed) {
+  background: #00000080 !important;
+  box-shadow: none !important;
+}
+.accordion-body {
+  padding: 16px 8px !important;
+}
+.accordion-body p,
+.accordion-body li {
+  color: #fff !important;
+}
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 100% !important;
+  }
+}
