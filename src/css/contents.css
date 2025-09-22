@@ -6,6 +6,10 @@
   position: fixed;
   top: 100vh;
 } */
+.logo-div {
+  max-width: 500px;
+  margin: 0 auto;
+}
 .short-text-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -50,7 +54,7 @@
   background: #00000080;
   border-radius: 6px;
   padding: 8px;
-  height: 125px;
+  height: 110px;
 }
 .debt-stress-card p:first-child {
   color: #ca2e25 !important;

@@ -7,6 +7,7 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import logo from "../images/logo.png";
 
 const Footer = () => {
   return (
@@ -15,24 +16,27 @@ const Footer = () => {
         <div className="footer-top-flex">
           <div>
             <div className="footer-logo">
-              <img
-                src="https://singledebt.in/wp-content/uploads/2024/10/footer-logo-2.png"
-                alt=""
-              />
+              <img src={logo} alt="" />
             </div>
             <p className="mt-2">
-              Join the #SoundsOfSilence initiative with SingleDebt in
-              association with Mann Talks. For too long, debt has stolen voices,
-              sleep, and dignity—forcing millions to suffer in silence. This
-              campaign is not just awareness, it is resistance. A stand against
-              the invisible crisis where financial pain meets mental health.
+              Join the #SoundsOfSilence initiative by SingleDebt. For too long,
+              debt has stolen voices, sleep, and dignity—forcing millions of
+              middle class Indians to suffer in silence. This initiative is not
+              just awareness, it is care in action. A collective stand for hope,
+              healing, and support — where financial struggles meet compassion
+              for mental health. <br />
+              <br />
               Together, we can shatter the stigma, give power back to silenced
               voices, and build a future where no one drowns alone in quiet
-              despair. It's time to turn silence into strength.
+              despair.
             </p>
           </div>
           <div className="footer-top-right">
             <div>
+              <div className="mb-4">
+                <p>It's time to be heard.</p>
+                <p>Let's Talk.</p>
+              </div>
               <h2>#SoundsOfSilence</h2>
               <h2>#DebtFreeIndia</h2>
               <h2>#BreakTheSilence</h2>

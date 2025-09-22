@@ -2,7 +2,7 @@ const debtStress = [
   {
     title: "Home Visits",
     content:
-      "Relentless creditor visits that invade privacy and shake the sense of safety at home—often triggered by missed EMIs, mounting penalties, and escalating legal notices that turn thresholds into battlegrounds.",
+      "Relentless creditor visits that invade privacy and shake the sense of safety at home—often triggered by missed EMIs or mounting penalties",
   },
   {
     title: "Abusive Language",
@@ -16,6 +16,11 @@ const debtStress = [
   {
     title: "Office Visits",
     content: "Embarrassment and humiliation in professional spaces.",
+  },
+  {
+    title: "Legal Notices",
+    content:
+      "Repeated formal legal communications and warnings, often signaling potential court actions or asset seizures, adding pressure beyond the immediate financial burden.",
   },
 ];
 

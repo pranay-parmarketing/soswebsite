@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import mannTalksIntro from "../video/mann-talks-intro.mp4";
+import logo from "../images/logo.png";
 
 const Contents = () => {
   const { contentsRef } = useContext(AppContext);
@@ -18,12 +19,17 @@ const Contents = () => {
     <div className="contents hide" ref={contentsRef}>
       <div className="container p-2 pt-4">
         <div className="text-center">
-          <h1 className="mb-2">
+          {/* <h1 className="mb-2">
             Sounds of Silence (SOS) — An Initiative by SingleDebt
-          </h1>
+          </h1> */}
+        </div>
+        <div className="logo-div">
+          <img src={logo} alt="" />
+        </div>
+        <div className="text-center">
           <p>
             Sounds of Silence is an initiative by SingleDebt to turn unspoken
-            debt burdens into conversations of hope and healing
+            debt burdens into conversations of hope and healing.
           </p>
           <p className="fw-bold">It's time to be heard</p>
         </div>
@@ -43,8 +49,8 @@ const Contents = () => {
                 financial insecurity and 58% struggling to meet monthly
                 expenses, debt isn't just a number — it silently rewires mental
                 health. Unpaid EMIs, constant calls, and relentless pressure
-                translate into anxiety, shame, and isolation. SOS exists to
-                break this silence, turning hidden suffering into open
+                translate into anxiety, shame, and isolation. SOS initiative
+                exists to break this silence, turning hidden suffering into open
                 conversations, shared resilience, and collective healing with
                 the support of mental health professionals.
               </p>
@@ -56,7 +62,9 @@ const Contents = () => {
         </div>
       </div>
       <div className="container py-4 px-2">
-        <h2 className="text-center mb-4">What Debt Stress Manifests Like</h2>
+        <h2 className="text-center mb-4">
+          The Weight of Debt: How It Shows Up in Life
+        </h2>
         <div className="key-char-grid">
           {keyChar.map((item, index) => {
             return (
@@ -121,42 +129,27 @@ const Contents = () => {
               <h2 className="mb-2">Through this initiative, we aim to:</h2>
               <ul className="mb-2">
                 <li>
-                  Provide free financial-mental health counselling to
-                  individuals silently struggling with debt.
+                  Free Counselling For All - Provide free financial and mental
+                  health counselling to individuals silently struggling with
+                  debt.
                 </li>
                 <li>
-                  Share a dedicated helpline for free and confidential mental
-                  health support by professionals, where people can openly talk
-                  about their debt-related stress without fear or judgment.
+                  Free & Confidential Helpline - Speak openly with mental health
+                  professionals and receive on-call help 24x7 without fear or
+                  judgment.
                 </li>
                 <li>
-                  Offer access to a “Mindfulness Mann Se” a free mindfulness and
-                  meditation audio series designed to reduce stress, anxiety,
-                  and improve overall well-being.
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="mb-2">
-                By joining the Sounds of Silence (SOS) movement, individuals
-                can:
-              </h2>
-              <ul>
-                <li>
-                  Find relief from isolation by realizing they're not alone in
-                  their struggles.
+                  Learning Mindfulness - Access self-help tool like Mindfulness
+                  Mann Se, a free mindfulness and meditation audio series to
+                  keep your calm and mind free from stress.
                 </li>
                 <li>
-                  Gain emotional strength to face creditors, EMIs, and financial
-                  uncertainty with dignity.
-                </li>
-                <li>
-                  Build mental resilience and learn coping strategies to manage
-                  anxiety, shame, and stress.
-                </li>
-                <li>
-                  Reclaim their voice and peace of mind in the journey toward
-                  financial and emotional freedom.
+                  Free 1:1 therapy sessions - Video call sessions with
+                  therapists (first session free for enrolled clients during the
+                  initiative duration) to share your troubles and devise your
+                  path to peace with trained psychologists (master's degree in
+                  Clinical (non-RCI) or Counselling Psychology from premier
+                  educational institutions)
                 </li>
               </ul>
             </div>
@@ -167,16 +160,18 @@ const Contents = () => {
         <div className="container p-0">
           <div className="mann-talk-flex">
             <div>
-              <h2 className="mb-2">About Mann Talks</h2>
+              <h2 className="mb-2">About Mann Talks X SOS</h2>
               <p>
-                Mann Talks is a mental health NGO dedicated to empowering
-                individuals to prioritize their psychological well-being. With a
-                mission to normalize conversations around mental health, Mann
-                Talks offers counselling, resources, and awareness programs that
-                make emotional support accessible to all. Their collaboration in
-                the Sounds of Silence initiative ensures that debt-driven mental
-                health struggles receive the empathy, care, and professional
-                guidance they deserve.
+                Established in 2020 by Vidhi Shanghvi, Mann Talks is a
+                non-profit mental health initiative driven by the principle of
+                Leave No One Behind. Dedicated to making quality psychological
+                support accessible across India, through free helplines, email
+                counselling, and affordable long-term therapy. Mann Talks
+                combines prevention, promotion, and care to build a more
+                resilient mental health ecosystem. Their collaboration with the
+                Sounds of Silence Initiative by SingleDebt ensures that
+                debt-driven mental health struggles are met with empathy,
+                professional support, and pathways to healing.
               </p>
             </div>
             <div>
@@ -281,8 +276,17 @@ const Contents = () => {
                 className="mt-1"
               />
               <label className="text-white" htmlFor="consent">
-                I agree to be contacted by SingleDebt and its partner, Mann
-                Talks, for counselling and support.
+                I hereby consent to be contacted by SingleDebt and its
+                counselling partner, Mann Talks, for the purpose of providing
+                counselling and support services, and I confirm that I have read
+                and accept the{" "}
+                <a
+                  href="#"
+                  className="text-decoration-none"
+                  style={{ color: "#ca2e25" }}
+                >
+                  Terms and Conditions.
+                </a>
               </label>
             </div>
           </div>
@@ -290,214 +294,207 @@ const Contents = () => {
             <button className="button">Break the silence</button>
           </div>
         </div>
+      </div>
 
-        <div className="mt-5">
-          <h2 className="text-center mb-4">
-            FAQs - Sounds of Silence (SOS) Initiative
-          </h2>
+      <div className="container p-2">
+        <h2 className="text-center mb-4">
+          FAQs - Sounds of Silence (SOS) Initiative
+        </h2>
 
-          <div className="accordion" id="accordionExample">
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
-                >
-                  What is the Sounds of Silence (SOS) campaign about?
-                </button>
-              </h2>
-              <div
-                id="collapseOne"
-                className="accordion-collapse collapse show"
-                data-bs-parent="#accordionExample"
+        <div className="accordion" id="accordionExample">
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
               >
-                <div className="accordion-body">
-                  <p>
-                    The Sounds of Silence (SOS) campaign is an initiative by
-                    SingleDebt, in association with Mann Talks - a leading
-                    mental health support NGO. The campaign is dedicated to
-                    breaking the silence around debt-related stress and its
-                    profound impact on mental health. Through this initiative,
-                    we aim to create a safe space where individuals can share,
-                    heal, and access both financial guidance and psychological
-                    support without stigma.
-                  </p>
-                </div>
+                What is the Sounds of Silence (SOS) initiative about?
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              className="accordion-collapse collapse show"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <p>
+                  The Sounds of Silence (SOS) initiative by SingleDebt, in
+                  association with Mann Talks - a leading mental health support
+                  NGO is dedicated to breaking the silence around debt-related
+                  stress and its profound impact on mental health. Through this
+                  initiative, we aim to create a safe space where individuals
+                  can share, heal, and access both financial guidance and
+                  psychological support without stigma. Open to hear, open to
+                  talk.
+                </p>
               </div>
             </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  Who are Mann Talks, and how do they support this initiative?
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
               >
-                <div className="accordion-body">
-                  <p>
-                    Mann Talks is a respected mental health support NGO known
-                    for its compassionate approach and strong professional
-                    network of trained psychologists, counsellors, and wellness
-                    experts. With years of experience in addressing emotional
-                    well-being, they bring their expertise to the SOS campaign
-                    by offering free counselling sessions, audio resources, and
-                    empathetic guidance. Their legacy lies in helping
-                    individuals break the stigma around mental health and
-                    ensuring no one has to fight silent battles alone.
-                  </p>
-                </div>
+                Who are Mann Talks, and how do they support this initiative?
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <p>
+                  Mann Talks is a respected mental health support NGO
+                  established by Vidhi Shanghvi, driven by the principle of
+                  Leave No One Behind. Dedicated to making quality psychological
+                  support accessible across India, through free helplines, email
+                  counselling, and affordable long-term therapy. Their
+                  collaboration with the Sounds of Silence Initiative by
+                  SingleDebt ensures that debt-driven mental health struggles
+                  are met with empathy, professional support, and pathways to
+                  healing. Their legacy lies in helping individuals break the
+                  stigma around mental health and ensuring no one has to fight
+                  silent battles alone.
+                </p>
               </div>
             </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                >
-                  Who can seek help through this initiative?
-                </button>
-              </h2>
-              <div
-                id="collapseThree"
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
               >
-                <div className="accordion-body">
-                  <p>
-                    Anyone experiencing stress, anxiety, or mental strain due to
-                    debt, EMIs, or financial pressure can reach out. Whether
-                    you're a student, professional, entrepreneur, or homemaker —
-                    you are not alone.
-                  </p>
-                </div>
+                Who can seek help through this initiative?
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <p>
+                  Anyone experiencing stress, anxiety, or mental strain due to
+                  debt, EMIs, or financial pressure can reach out. Whether
+                  you're a student, professional, entrepreneur, or homemaker —
+                  you are not alone.
+                </p>
               </div>
             </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseFour"
-                  aria-expanded="false"
-                  aria-controls="collapseFour"
-                >
-                  What kind of support will I receive?
-                </button>
-              </h2>
-              <div
-                id="collapseFour"
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFour"
+                aria-expanded="false"
+                aria-controls="collapseFour"
               >
-                <div className="accordion-body">
-                  <p>You will have access to:</p>
-                  <ul>
-                    <li>
-                      Free financial-mental counselling through our association
-                      with Mann Talks.
-                    </li>
-                    <li>
-                      Dedicated calling line for confidential conversations
-                      about debt-related stress.
-                    </li>
-                    <li>
-                      "Mann Ki Therapy" audio courses to build resilience and
-                      reduce anxiety.
-                    </li>
-                    <li>
-                      Trained staff who listen with empathy and guide you
-                      towards practical relief.
-                    </li>
-                    <li>
-                      Additional financial counselling, plus for our enrolled
-                      clients:
-                      <ul>
-                        <li>
-                          Legal and paralegal support to handle creditor
-                          harassment.
-                        </li>
-                        <li>
-                          1:1 face-to-face or video call therapy session (first
-                          session free).
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
+                What kind of support will I receive?
+              </button>
+            </h2>
+            <div
+              id="collapseFour"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <p>You will have access to:</p>
+                <ul>
+                  <li>
+                    Free financial-mental counselling by SingleDebt and Mann
+                    Talks professionals
+                  </li>
+                  <li>
+                    Dedicated help line for confidential conversations about
+                    debt-related stress with certified mental health
+                    professionals.
+                  </li>
+                  <li>
+                    Mindfulness Mann Se Mann free audio series self-help tool to
+                    build resilience and reduce anxiety.
+                  </li>
+                  <li>
+                    'Empathy based conversations' trained SingleDebt staff who
+                    listen with empathy and guide you towards practical relief.
+                  </li>
+                  <li>
+                    Additional 1:1 (1 hour long) video call therapy session with
+                    professional therapists (first session free) for SingleDebt
+                    enrolled clients.
+                  </li>
+                </ul>
               </div>
             </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseFive"
-                  aria-expanded="false"
-                  aria-controls="collapseFive"
-                >
-                  Is my information kept confidential?
-                </button>
-              </h2>
-              <div
-                id="collapseFive"
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFive"
+                aria-expanded="false"
+                aria-controls="collapseFive"
               >
-                <div className="accordion-body">
-                  <p>
-                    Yes. All conversations and personal details shared through
-                    this campaign are kept strictly confidential. Your trust and
-                    privacy are our top priority.
-                  </p>
-                </div>
+                Is my information kept confidential?
+              </button>
+            </h2>
+            <div
+              id="collapseFive"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <p>
+                  Yes. All conversations and personal details shared through
+                  this campaign are kept strictly confidential. Your trust and
+                  privacy are our top priority.
+                </p>
               </div>
             </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseSix"
-                  aria-expanded="false"
-                  aria-controls="collapseSix"
-                >
-                  How do I get started?
-                </button>
-              </h2>
-              <div
-                id="collapseSix"
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseSix"
+                aria-expanded="false"
+                aria-controls="collapseSix"
               >
-                <div className="accordion-body">
-                  <p>
-                    Simply fill out the form above or call our dedicated
-                    helpline number. Once you reach out, our team will connect
-                    you with a trained counsellor who will guide you step by
-                    step.
-                  </p>
-                </div>
+                How do I get started?
+              </button>
+            </h2>
+            <div
+              id="collapseSix"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <p>
+                  Simply fill out the form above or call our dedicated helpline
+                  number. Once you reach out, our team will connect you with a
+                  trained counsellor who will guide you step by step.
+                </p>
               </div>
             </div>
           </div>
