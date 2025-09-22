@@ -11,6 +11,7 @@ body {
   background-attachment: fixed;
 }
 :root {
+  --red: #ca2e25;
   --transition: all 0.5s ease-in-out;
 }
 @font-face {
@@ -35,7 +36,7 @@ h1 {
 h2 {
   font-family: "bold";
   font-size: 18px;
-  color: #fff;
+  color: var(--red);
   margin: 0;
 }
 p,
@@ -52,7 +53,7 @@ ul {
   border: none;
   outline: none;
   padding: 8px 16px;
-  background: #ca2e25;
+  background: var(--red);
   border-radius: 6px;
   color: #fff;
   font-family: "regular";
@@ -93,7 +94,7 @@ label {
 }
 input[type="radio"],
 input[type="checkbox"] {
-  accent-color: #ca2e25;
+  accent-color: var(--red);
 }
 .accordion-item {
   background: transparent !important;

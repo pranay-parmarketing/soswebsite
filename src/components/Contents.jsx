@@ -9,8 +9,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import mannTalksIntro from "../video/mann-talks-intro.mp4";
+import mannTalksLogo from "../images/mann-talks-logo.png";
 import logo from "../images/logo.png";
+import mindfull from "../video/mindfull.mp4";
 
 const Contents = () => {
   const { contentsRef } = useContext(AppContext);
@@ -175,19 +176,8 @@ const Contents = () => {
               </p>
             </div>
             <div>
-              <div className="mann-talk-intro rounded overflow-hidden">
-                <video controls playsInline>
-                  <source src={mannTalksIntro} type="video/mp4" />
-                </video>
-              </div>
-              <div className="text-center">
-                <a
-                  href="https://www.youtube.com/watch?v=CrDEtB0KFPM&list=PLMMPLX-QoD5vpgbZSuvQQbnpG36th3C_k"
-                  target="_blank"
-                  className="button d-inline-block text-decoration-none mt-2"
-                >
-                  Learn More
-                </a>
+              <div className="mann-talk-logo rounded overflow-hidden">
+                <img src={mannTalksLogo} alt="" />
               </div>
             </div>
           </div>
@@ -295,7 +285,45 @@ const Contents = () => {
           </div>
         </div>
       </div>
-
+      <div className="container-fluid py-4 px-2 my-4 background">
+        <div className="container p-0">
+          <div className="mindfull-flex">
+            <div>
+              <h2 className="mb-2">Mindfulness Audio Series</h2>
+              <p>
+                Mindfulness Mann Se is a self-help program built by Mann Talks,
+                in collaboration with global experts and is rooted in scientific
+                research, providing free access to comprehensive tools to
+                enhance your well-being. This audio series offers interactive
+                learning, guided practice, and insights that will deepen your
+                understanding and application of mindfulness in real-life
+                situations. Mindfulness practice has been proven to help have
+                better self-regulation, improve our physical and psychological
+                health, boost memory and focus, reduce stress, anxiety,
+                reactivity, and restlessness and enhance our mood and general
+                sense of peace, greater life satisfaction and overall
+                well-being.
+              </p>
+            </div>
+            <div>
+              <div className="mindfull-video rounded overflow-hidden">
+                <video playsInline controls>
+                  <source src={mindfull} type="video/mp4" />
+                </video>
+              </div>
+              <div className="text-center">
+                <a
+                  href="https://www.youtube.com/watch?v=CrDEtB0KFPM&list=PLMMPLX-QoD5vpgbZSuvQQbnpG36th3C_k"
+                  target="_blank"
+                  className="button d-inline-block text-decoration-none mt-2"
+                >
+                  Click Here To Start Listening
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="container p-2">
         <h2 className="text-center mb-4">
           FAQs - Sounds of Silence (SOS) Initiative

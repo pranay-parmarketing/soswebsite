@@ -23,9 +23,6 @@
   justify-content: space-between;
   gap: 24px;
 }
-.mann-talk-flex .mann-talk-intro video {
-  width: 600px;
-}
 .key-char-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -57,7 +54,7 @@
   height: 110px;
 }
 .debt-stress-card p:first-child {
-  color: #ca2e25 !important;
+  color: var(--red) !important;
 }
 .movement-img img {
   width: 100%;
@@ -82,12 +79,21 @@
   justify-content: space-between;
   gap: 24px;
 }
+.mann-talk-logo {
+  width: 400px;
+}
+.mindfull-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.mindfull-video video {
+  max-width: 500px;
+}
 @media screen and (max-width: 1200px) {
   .key-char-card {
     height: 130px;
-  }
-  .mann-talk-flex .mann-talk-intro video {
-    width: 500px;
   }
 }
 @media screen and (max-width: 992px) {
@@ -100,11 +106,9 @@
   .key-char-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .mann-talk-flex {
+  .mann-talk-flex,
+  .mindfull-flex {
     flex-direction: column;
-  }
-  .mann-talk-flex .mann-talk-intro video {
-    width: 100%;
   }
 }
 @media screen and (max-width: 768px) {
@@ -120,6 +124,9 @@
   .initiative-grid {
     grid-template-columns: 1fr;
   }
+  .mindfull-video video {
+    max-width: 100%;
+  }
 }
 @media screen and (max-width: 576px) {
   .key-char-grid {
@@ -133,5 +140,8 @@
   }
   .key-char-card .icon {
     margin: 0 auto;
+  }
+  .mann-talk-logo {
+    width: 100%;
   }
 }
