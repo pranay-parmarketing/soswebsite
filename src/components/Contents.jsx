@@ -8,11 +8,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Pagination, Autoplay, FreeMode } from "swiper/modules";
 import mannTalksLogo from "../images/mann-talks-logo.png";
 import logo from "../images/logo.png";
 import mindfull from "../video/mindfull.mp4";
 import faqBanner from "../images/faq-banner.webp";
+import media from "../data/media";
 
 const Contents = () => {
   const { contentsRef } = useContext(AppContext);
@@ -109,52 +110,52 @@ const Contents = () => {
           </Swiper>
         </div>
       </div>
-      <div className="container-fluid py-4 px-2 my-4">
-        <div className="container p-0">
-          <div className="initiative-grid">
-            <div>
-              <h2 className="mb-2">What the Initiative Aims to Achieve</h2>
-              <p className="mb-2">
-                The Sounds of Silence (SOS) initiative, in association with Mann
-                Talks (Mental Health NGO), aims to break the silence around
-                debt-driven stress and mental health struggles. This initiative
-                focuses on providing safe spaces, practical tools, empathetic
-                listening and support by mental health professionals to help
-                individuals cope with the emotional and psychological weight of
-                financial burdens.
-              </p>
-            </div>
-            <div className="movement-img rounded overflow-hidden">
-              <img src={sample} alt="" />
-            </div>
-            <div>
-              <h2 className="mb-2">Through this initiative, we aim to:</h2>
-              <ul className="mb-2">
-                <li>
-                  Free Counselling For All - Provide free financial and mental
-                  health counselling to individuals silently struggling with
-                  debt.
-                </li>
-                <li>
-                  Free & Confidential Helpline - Speak openly with mental health
-                  professionals and receive on-call help 24x7 without fear or
-                  judgment.
-                </li>
-                <li>
-                  Learning Mindfulness - Access self-help tool like Mindfulness
-                  Mann Se, a free mindfulness and meditation audio series to
-                  keep your calm and mind free from stress.
-                </li>
-                <li>
-                  Free 1:1 therapy sessions - Video call sessions with
-                  therapists (first session free for enrolled clients during the
-                  initiative duration) to share your troubles and devise your
-                  path to peace with trained psychologists (master's degree in
-                  Clinical (non-RCI) or Counselling Psychology from premier
-                  educational institutions)
-                </li>
-              </ul>
-            </div>
+      <div>
+        <div className="container px-2 py-4">
+          <div className="text-center">
+            <h2 className="mb-2">What the Initiative Aims to Achieve</h2>
+            <p className="mb-2">
+              The Sounds of Silence (SOS) initiative, in association with Mann
+              Talks (Mental Health NGO), aims to break the silence around
+              debt-driven stress and mental health struggles. This initiative
+              focuses on providing safe spaces, practical tools, empathetic
+              listening and support by mental health professionals to help
+              individuals cope with the emotional and psychological weight of
+              financial burdens.
+            </p>
+          </div>
+          <div
+            className="movement-img rounded overflow-hidden my-4"
+            style={{ maxWidth: "500px", maxHeight: "300px", margin: "0 auto" }}
+          >
+            <img src={sample} alt="" />
+          </div>
+          <div>
+            <h2 className="mb-2">Through this initiative, we aim to:</h2>
+            <ul className="mb-2">
+              <li>
+                Free Counselling For All - Provide free financial and mental
+                health counselling to individuals silently struggling with debt.
+              </li>
+              <li>
+                Free & Confidential Helpline - Speak openly with mental health
+                professionals and receive on-call help 24x7 without fear or
+                judgment.
+              </li>
+              <li>
+                Learning Mindfulness - Access self-help tool like Mindfulness
+                Mann Se, a free mindfulness and meditation audio series to keep
+                your calm and mind free from stress.
+              </li>
+              <li>
+                Free 1:1 therapy sessions - Video call sessions with therapists
+                (first session free for enrolled clients during the initiative
+                duration) to share your troubles and devise your path to peace
+                with trained psychologists (master's degree in Clinical
+                (non-RCI) or Counselling Psychology from premier educational
+                institutions)
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -324,6 +325,35 @@ const Contents = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="container-fluid py-4 px-2">
+        <h2 className="text-center mb-4">Media feature</h2>
+        <Swiper
+          modules={[Autoplay, FreeMode]}
+          spaceBetween={20}
+          slidesPerView={8}
+          loop={true}
+          freeMode={true}
+          allowTouchMove={false} // disable dragging if you only want auto scroll
+          speed={3000} // 👈 control smoothness (higher = slower scroll)
+          autoplay={{
+            delay: 0, // 👈 no delay between transitions
+            disableOnInteraction: false,
+          }}
+          breakpoints={{
+            0: { slidesPerView: 3, spaceBetween: 50 },
+            576: { slidesPerView: 6, spaceBetween: 50 },
+            1000: { slidesPerView: 8, spaceBetween: 50 },
+          }}
+        >
+          {media.map((item, index) => (
+            <SwiperSlide key={index}>
+              <div className="media-card">
+                <img src={item} alt="" />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
       <div className="container p-2">
         <h2 className="text-center mb-2">
