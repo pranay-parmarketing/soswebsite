@@ -34,7 +34,7 @@ const Video = () => {
     const handleScroll = (e) => {
       if (!duration) return;
 
-      const delta = e.deltaY > 0 ? 1.5 : -1.5; // step per scroll
+      const delta = e.deltaY > 0 ? 0.25 : -0.25; // step per scroll
       progressTarget.current = Math.min(
         100,
         Math.max(0, progressTarget.current + delta)
@@ -59,7 +59,7 @@ const Video = () => {
       const diff = progressTarget.current - progress.current;
       const step = diff * 1; // smoothing speed
 
-      if (Math.abs(diff) > 0.001) {
+      if (Math.abs(diff) > 0.0000000000001) {
         progress.current = progress.current + step;
         setProgressDisplay(progress.current); // update UI text
 
@@ -70,9 +70,11 @@ const Video = () => {
           if (progress.current >= 99.9) {
             animatedContainerRef.current.classList.add("hide");
             contentsRef.current.classList.remove("hide");
+            document.body.style.overflow = "auto";
           } else {
             animatedContainerRef.current.classList.remove("hide");
             contentsRef.current.classList.add("hide");
+            document.body.style.overflow = "hidden";
           }
         }
       }

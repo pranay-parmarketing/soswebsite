@@ -1,11 +1,11 @@
-/* .contents {
+.contents {
   position: relative;
   z-index: 2;
 }
 .contents.hide {
   position: fixed;
   top: 100vh;
-} */
+}
 .logo-div {
   max-width: 500px;
   margin: 0 auto;
