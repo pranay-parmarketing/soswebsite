@@ -74,7 +74,7 @@ const Contents = () => {
               <div className="key-char-card" key={index}>
                 <img src={item.img} alt="" className="icon" />
                 <div>
-                  <p className="fw-bold">{item.title}</p>
+                  <p className="red-text">{item.title}</p>
                   <p>{item.content}</p>
                 </div>
               </div>
@@ -88,11 +88,13 @@ const Contents = () => {
         </h2>
         <div>
           <Swiper
+            style={{ height: "200px" }}
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={8}
             slidesPerView={3}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             loop={true}
+            pagination={{ clickable: true }}
             breakpoints={{
               0: { slidesPerView: 1 },
               576: { slidesPerView: 2 },
@@ -124,38 +126,38 @@ const Contents = () => {
               financial burdens.
             </p>
           </div>
-          <div
-            className="movement-img rounded overflow-hidden my-5"
-            style={{ maxWidth: "500px", maxHeight: "300px", margin: "0 auto" }}
-          >
-            <img src={sample} alt="" />
-          </div>
-          <div>
-            <h2 className="mb-2">Through this initiative, we aim to:</h2>
-            <ul className="mb-2">
-              <li>
-                Free Counselling For All - Provide free financial and mental
-                health counselling to individuals silently struggling with debt.
-              </li>
-              <li>
-                Free & Confidential Helpline - Speak openly with mental health
-                professionals and receive on-call help 24x7 without fear or
-                judgment.
-              </li>
-              <li>
-                Learning Mindfulness - Access self-help tool like Mindfulness
-                Mann Se, a free mindfulness and meditation audio series to keep
-                your calm and mind free from stress.
-              </li>
-              <li>
-                Free 1:1 therapy sessions - Video call sessions with therapists
-                (first session free for enrolled clients during the initiative
-                duration) to share your troubles and devise your path to peace
-                with trained psychologists (master's degree in Clinical
-                (non-RCI) or Counselling Psychology from premier educational
-                institutions)
-              </li>
-            </ul>
+          <div className="initiative-grid mt-5">
+            <div className="movement-img rounded overflow-hidden">
+              <img src={sample} alt="" />
+            </div>
+            <div>
+              <h2 className="mb-2">Through this initiative, we aim to:</h2>
+              <ul className="mb-2">
+                <li>
+                  Free Counselling For All - Provide free financial and mental
+                  health counselling to individuals silently struggling with
+                  debt.
+                </li>
+                <li>
+                  Free & Confidential Helpline - Speak openly with mental health
+                  professionals and receive on-call help 24x7 without fear or
+                  judgment.
+                </li>
+                <li>
+                  Learning Mindfulness - Access self-help tool like Mindfulness
+                  Mann Se, a free mindfulness and meditation audio series to
+                  keep your calm and mind free from stress.
+                </li>
+                <li>
+                  Free 1:1 therapy sessions - Video call sessions with
+                  therapists (first session free for enrolled clients during the
+                  initiative duration) to share your troubles and devise your
+                  path to peace with trained psychologists (master's degree in
+                  Clinical (non-RCI) or Counselling Psychology from premier
+                  educational institutions)
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -289,7 +291,7 @@ const Contents = () => {
       </div>
       <div className="container-fluid py-5 px-2 my-5 background">
         <div className="container p-0">
-          <div className="mindfull-flex">
+          <div className="mindfull-grid">
             <div>
               <h2 className="mb-2">Mindfulness Audio Series</h2>
               <p>
@@ -308,8 +310,8 @@ const Contents = () => {
               </p>
             </div>
             <div>
-              <div className="mindfull-video rounded overflow-hidden">
-                <video playsInline controls>
+              <div className="mindfull-video text-center">
+                <video playsInline controls className="rounded overflow-hidden">
                   <source src={mindfull} type="video/mp4" />
                 </video>
               </div>
@@ -326,7 +328,7 @@ const Contents = () => {
           </div>
         </div>
       </div>
-      <div className="container-fluid py-5 px-2 my-5">
+      <div className="container-fluid py-5 px-2 my-5 background">
         <h2 className="text-center mb-4">Media feature</h2>
         <Swiper
           modules={[Autoplay, FreeMode]}
