@@ -14,3 +14,29 @@
   height: 100vh;
   object-fit: cover;
 }
+.swipe-up-lottie {
+  width: 400px;
+  height: auto;
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  animation: swipe-up 6s ease-in-out forwards;
+}
+@keyframes swipe-up {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -2,25 +2,50 @@ import { useContext, useEffect, useRef, useState } from "react";
 import "../css/video.css";
 import video from "../video/video.mp4";
 import { AppContext } from "../context/AppContext";
+import swipeUp from "../lottie/swipe-up.json";
+import Lottie from "react-lottie";
 
 const Video = () => {
   const { contentsRef } = useContext(AppContext);
   const videoRef = useRef(null);
   const animatedContainerRef = useRef(null);
+  const lottieRef = useRef(null);
 
   const [duration, setDuration] = useState(0);
-  const [progressDisplay, setProgressDisplay] = useState(0); // only for UI
+  const [progressDisplay, setProgressDisplay] = useState(0);
 
-  const progress = useRef(0); // actual progress value
-  const progressTarget = useRef(0); // target progress from scroll
+  const progress = useRef(0);
+  const progressTarget = useRef(0);
+  const lastTouchY = useRef(0);
+  const lastUpdateTime = useRef(0);
 
-  // Load video duration
+  const [videoFinished, setVideoFinished] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
+
+  // Load video duration + autoplay intro
   useEffect(() => {
     const videoElement = videoRef.current;
     if (!videoElement) return;
 
     const handleLoadedMetadata = () => {
       setDuration(videoElement.duration);
+
+      // ✅ autoplay first 2s
+      videoElement.muted = true;
+      videoElement.play();
+
+      setTimeout(() => {
+        videoElement.pause();
+        const introProgress =
+          (videoElement.currentTime / videoElement.duration) * 100;
+
+        // Sync scrubbing state with current time
+        progress.current = introProgress;
+        progressTarget.current = introProgress;
+        setProgressDisplay(introProgress);
+
+        setIntroDone(true); // now allow scrubbing
+      }, 900);
     };
 
     videoElement.addEventListener("loadedmetadata", handleLoadedMetadata);
@@ -29,53 +54,94 @@ const Video = () => {
     };
   }, []);
 
-  // Scroll updates the target progress
+  // Desktop: scroll updates target progress
   useEffect(() => {
-    const handleScroll = (e) => {
-      if (!duration) return;
+    if (videoFinished || !introDone) return;
 
-      const delta = e.deltaY > 0 ? 0.25 : -0.25; // step per scroll
+    const handleWheel = (e) => {
+      if (!duration) return;
+      const delta = e.deltaY > 0 ? 1 : -1;
       progressTarget.current = Math.min(
         100,
         Math.max(0, progressTarget.current + delta)
       );
     };
 
-    window.addEventListener("wheel", handleScroll, { passive: true });
-    return () => window.removeEventListener("wheel", handleScroll);
-  }, [duration]);
+    window.addEventListener("wheel", handleWheel, { passive: true });
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, [duration, videoFinished, introDone]);
 
-  // Smooth animation toward target
+  // Mobile: touch updates target progress
+  useEffect(() => {
+    if (videoFinished || !introDone) return;
+
+    const handleTouchStart = (e) => {
+      lastTouchY.current = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e) => {
+      if (!duration) return;
+      const currentY = e.touches[0].clientY;
+      const deltaY = lastTouchY.current - currentY;
+      const delta = deltaY * 0.05;
+      progressTarget.current = Math.min(
+        100,
+        Math.max(0, progressTarget.current + delta)
+      );
+      lastTouchY.current = currentY;
+    };
+
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, [duration, videoFinished, introDone]);
+
+  // Smooth animation loop for scrubbing
   useEffect(() => {
     const videoElement = videoRef.current;
     let animationFrame;
 
-    const animate = () => {
+    const animate = (time) => {
       if (!videoElement || !duration) {
         animationFrame = requestAnimationFrame(animate);
         return;
       }
 
-      const diff = progressTarget.current - progress.current;
-      const step = diff * 1; // smoothing speed
+      if (introDone && !videoFinished) {
+        const diff = progressTarget.current - progress.current;
+        progress.current += diff * 0.03;
+        setProgressDisplay(progress.current);
 
-      if (Math.abs(diff) > 0.0000000000001) {
-        progress.current = progress.current + step;
-        setProgressDisplay(progress.current); // update UI text
+        if (time - lastUpdateTime.current > 60) {
+          videoElement.currentTime = (progress.current / 100) * duration;
+          lastUpdateTime.current = time;
+        }
 
-        videoElement.currentTime = (progress.current / 100) * duration;
+        if (progress.current >= 99.9) {
+          setVideoFinished(true);
+          animatedContainerRef.current.style.height = 0;
+          window.scrollTo(0, 0);
 
-        // ✅ toggle "hide"
-        if (animatedContainerRef.current) {
-          if (progress.current >= 99.9) {
-            animatedContainerRef.current.classList.add("hide");
+          progress.current = 100;
+          progressTarget.current = 100;
+          videoElement.currentTime = duration;
+
+          if (animatedContainerRef.current && contentsRef.current) {
+            animatedContainerRef.current.classList.remove("hide");
             contentsRef.current.classList.remove("hide");
             document.body.style.overflow = "auto";
-          } else {
-            animatedContainerRef.current.classList.remove("hide");
-            contentsRef.current.classList.add("hide");
-            document.body.style.overflow = "hidden";
           }
+          return;
+        }
+
+        if (animatedContainerRef.current && contentsRef.current) {
+          animatedContainerRef.current.classList.remove("hide");
+          contentsRef.current.classList.add("hide");
+          document.body.style.overflow = "hidden";
         }
       }
 
@@ -84,13 +150,27 @@ const Video = () => {
 
     animationFrame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrame);
-  }, [duration]);
+  }, [duration, videoFinished, introDone]);
+
+  //
+  const swipeUpLottie = {
+    loop: true,
+    autoplay: true,
+    animationData: swipeUp,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   return (
     <div className="animated-container" ref={animatedContainerRef}>
-      <video ref={videoRef} muted playsInline>
+      <video ref={videoRef} playsInline preload="auto">
         <source src={video} type="video/mp4" />
       </video>
+
+      <div className="swipe-up-lottie" ref={lottieRef}>
+        <Lottie options={swipeUpLottie} />
+      </div>
     </div>
   );
 };
