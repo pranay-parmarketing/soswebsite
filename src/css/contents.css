@@ -15,13 +15,13 @@
   grid-template-columns: 2fr 1fr;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 48px;
 }
 .mann-talk-flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 48px;
 }
 .key-char-grid {
   display: grid;
@@ -44,8 +44,7 @@
   grid-area: 3 / 2 / 4 / 3;
 }
 .key-char-grid .icon {
-  width: 40px;
-  grid-row-end: 40px;
+  width: 50px;
 }
 .debt-stress-card {
   background: #00000080;
@@ -61,17 +60,9 @@
   width: 100%;
   height: 400px;
 }
-.movement-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 24px;
-}
 .form-container {
   max-width: 500px;
   width: 100%;
-  margin: 24px auto;
 }
 .mann-talk-logo {
   width: 400px;
@@ -80,7 +71,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 48px;
 }
 .mindfull-video video {
   max-width: 500px;
@@ -90,7 +81,7 @@
   grid-template-columns: repeat(2, 1fr);
   align-items: flex-start;
   justify-content: space-between;
-  gap: 8px;
+  gap: 24px;
 }
 .faq-grid > div:first-child img {
   max-height: 320px;

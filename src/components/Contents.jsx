@@ -20,7 +20,7 @@ const Contents = () => {
 
   return (
     <div className="contents hide" ref={contentsRef}>
-      <div className="container p-2 pt-4">
+      <div className="container p-2 pt-5">
         <div className="text-center">
           {/* <h1 className="mb-2">
             Sounds of Silence (SOS) — An Initiative by SingleDebt
@@ -36,7 +36,7 @@ const Contents = () => {
           </p>
         </div>
       </div>
-      <div className="container-fluid py-4 px-2 my-4 background">
+      <div className="container-fluid py-5 px-2 my-5 background">
         <div className="container p-0">
           <div className="short-text-grid">
             <div>
@@ -64,7 +64,7 @@ const Contents = () => {
           </div>
         </div>
       </div>
-      <div className="container py-4 px-2">
+      <div className="container py-5 my-5 px-2">
         <h2 className="text-center mb-4">
           The Weight of Debt: How It Shows Up in Life
         </h2>
@@ -82,7 +82,7 @@ const Contents = () => {
           })}
         </div>
       </div>
-      <div className="container py-4 px-2">
+      <div className="container py-5 mb-5 px-2">
         <h2 className="text-center mb-4">
           Debt Stress Leading to Mental Health Struggles
         </h2>
@@ -111,10 +111,10 @@ const Contents = () => {
         </div>
       </div>
       <div>
-        <div className="container px-2 py-4">
+        <div className="container px-2 py-5 my-5">
           <div className="text-center">
             <h2 className="mb-2">What the Initiative Aims to Achieve</h2>
-            <p className="mb-2">
+            <p>
               The Sounds of Silence (SOS) initiative, in association with Mann
               Talks (Mental Health NGO), aims to break the silence around
               debt-driven stress and mental health struggles. This initiative
@@ -125,7 +125,7 @@ const Contents = () => {
             </p>
           </div>
           <div
-            className="movement-img rounded overflow-hidden my-4"
+            className="movement-img rounded overflow-hidden my-5"
             style={{ maxWidth: "500px", maxHeight: "300px", margin: "0 auto" }}
           >
             <img src={sample} alt="" />
@@ -159,7 +159,7 @@ const Contents = () => {
           </div>
         </div>
       </div>
-      <div className="container-fluid py-4 px-2 my-4 background">
+      <div className="container-fluid py-5 px-2 my-5 background">
         <div className="container p-0">
           <div className="mann-talk-flex">
             <div>
@@ -185,7 +185,7 @@ const Contents = () => {
           </div>
         </div>
       </div>
-      <div className="container py-4 p-2">
+      <div className="container py-5 p-2">
         <div className="text-center">
           <h2>Take the First Step - Reach Out Today</h2>
           <p>
@@ -194,7 +194,7 @@ const Contents = () => {
             financial & mental health counselling.
           </p>
         </div>
-        <div className="form-container">
+        <div className="form-container my-5 mx-auto">
           <div className="form-floating mb-4">
             <input
               type="text"
@@ -287,7 +287,7 @@ const Contents = () => {
           </div>
         </div>
       </div>
-      <div className="container-fluid py-4 px-2 my-4 background">
+      <div className="container-fluid py-5 px-2 my-5 background">
         <div className="container p-0">
           <div className="mindfull-flex">
             <div>
@@ -326,7 +326,7 @@ const Contents = () => {
           </div>
         </div>
       </div>
-      <div className="container-fluid py-4 px-2">
+      <div className="container-fluid py-5 px-2 my-5">
         <h2 className="text-center mb-4">Media feature</h2>
         <Swiper
           modules={[Autoplay, FreeMode]}
@@ -355,8 +355,8 @@ const Contents = () => {
           ))}
         </Swiper>
       </div>
-      <div className="container p-2">
-        <h2 className="text-center mb-2">
+      <div className="container px-2 py-5 my-5">
+        <h2 className="text-center mb-4">
           FAQs - Sounds of Silence (SOS) Initiative
         </h2>
         <div className="faq-grid">

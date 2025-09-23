@@ -12,13 +12,13 @@ import logo from "../images/logo.png";
 const Footer = () => {
   return (
     <footer className="container-fluid background p-0">
-      <div className="container p-2 pt-4">
+      <div className="container p-2 pt-5">
         <div className="footer-top-flex">
           <div className="footer-logo">
             <img src={logo} alt="" />
           </div>
           <div>
-            <div className="mb-4">
+            <div className="mb-5">
               <p>It's time to be heard.</p>
               <p>Let's Talk.</p>
             </div>
@@ -86,7 +86,7 @@ const Footer = () => {
         </div>
       </div>
       <div
-        className="px-2 py-3 mt-4 text-center"
+        className="px-2 py-3 mt-5 text-center"
         style={{ background: "#000" }}
       >
         <p className="text-uppercase">
