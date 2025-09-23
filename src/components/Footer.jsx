@@ -11,14 +11,25 @@ import logo from "../images/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="container-fluid background px-2 py-4">
-      <div className="container p-0">
+    <footer className="container-fluid background p-0">
+      <div className="container p-2 pt-4">
         <div className="footer-top-flex">
+          <div className="footer-logo">
+            <img src={logo} alt="" />
+          </div>
           <div>
-            <div className="footer-logo">
-              <img src={logo} alt="" />
+            <div className="mb-4">
+              <p>It's time to be heard.</p>
+              <p>Let's Talk.</p>
             </div>
-            <p className="mt-2">
+            <p>#SoundsOfSilence</p>
+            <p>#DebtFreeIndia</p>
+            <p>#BreakTheSilence</p>
+          </div>
+        </div>
+        <div className="footer-bottom-flex mt-5">
+          <div>
+            <p>
               Join the #SoundsOfSilence initiative by SingleDebt. For too long,
               debt has stolen voices, sleep, and dignity—forcing millions of
               middle class Indians to suffer in silence. This initiative is not
@@ -32,49 +43,39 @@ const Footer = () => {
             </p>
           </div>
           <div className="footer-top-right">
-            <div>
-              <div className="mb-4">
-                <p>It's time to be heard.</p>
-                <p>Let's Talk.</p>
-              </div>
-              <h2>#SoundsOfSilence</h2>
-              <h2>#DebtFreeIndia</h2>
-              <h2>#BreakTheSilence</h2>
-            </div>
-
-            <div>
+            <div className="text-end">
               <button className="button">Visit forum</button>
-              <ul className="social-links">
-                <li>
-                  <a href="#">
-                    <FaFacebook />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <FaInstagram />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <FaLinkedin />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <FaTwitter />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <FaYoutube />
-                  </a>
-                </li>
-              </ul>
             </div>
+            <ul className="social-links">
+              <li>
+                <a href="#">
+                  <FaFacebook />
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FaInstagram />
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FaLinkedin />
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FaTwitter />
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FaYoutube />
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div className="mt-4">
+        <div className="mt-5">
           <p>
             Disclaimer: The statistics and information shared on this platform
             are derived from credible studies, mental health research, and
@@ -83,6 +84,15 @@ const Footer = () => {
             authoritative sources.
           </p>
         </div>
+      </div>
+      <div
+        className="px-2 py-3 mt-4 text-center"
+        style={{ background: "#000" }}
+      >
+        <p className="text-uppercase">
+          &copy; COPYRIGHT 2025 ALL RIGHTS RESERVED | SINGLEDEBT | DEBT-FREE
+          INDIA
+        </p>
       </div>
     </footer>
   );

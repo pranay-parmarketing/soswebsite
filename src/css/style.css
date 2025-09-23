@@ -29,20 +29,21 @@ img {
 }
 h1 {
   font-family: "bold";
-  font-size: 26px;
+  font-size: 32px;
   color: #fff;
   margin: 0;
 }
 h2 {
   font-family: "bold";
-  font-size: 18px;
+  font-size: 26px;
+  text-transform: uppercase;
   color: var(--red);
   margin: 0;
 }
 p,
 li {
   font-family: "regular";
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
   color: #fff !important;
 }
@@ -57,12 +58,12 @@ ul {
   border-radius: 6px;
   color: #fff;
   font-family: "regular";
-  font-size: 14px;
+  font-size: 16px;
   text-transform: capitalize;
 }
 input,
 label {
-  font-size: 14px;
+  font-size: 16px;
   font-family: "regular";
 }
 .background {

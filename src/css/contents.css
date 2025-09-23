@@ -55,6 +55,7 @@
 }
 .debt-stress-card p:first-child {
   color: var(--red) !important;
+  font-size: 18px;
 }
 .movement-img img {
   width: 100%;

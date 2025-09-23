@@ -34,7 +34,6 @@ const Contents = () => {
             Sounds of Silence is an initiative by SingleDebt to turn unspoken
             debt burdens into conversations of hope and healing.
           </p>
-          <p className="fw-bold">It's time to be heard</p>
         </div>
       </div>
       <div className="container-fluid py-4 px-2 my-4 background">
@@ -48,14 +47,15 @@ const Contents = () => {
                 eats away at the mind. Unlike visible struggles, financial
                 stress often hides behind closed doors, showing up instead as
                 sleepless nights, panic attacks, irritability, or even
-                depression. With nearly 69% of Indian households facing
-                financial insecurity and 58% struggling to meet monthly
-                expenses, debt isn't just a number — it silently rewires mental
-                health. Unpaid EMIs, constant calls, and relentless pressure
-                translate into anxiety, shame, and isolation. SOS initiative
-                exists to break this silence, turning hidden suffering into open
-                conversations, shared resilience, and collective healing with
-                the support of mental health professionals.
+                depression. <br />
+                <br /> With nearly 69% of Indian households facing financial
+                insecurity and 58% struggling to meet monthly expenses, debt
+                isn't just a number — it silently rewires mental health. Unpaid
+                EMIs, constant calls, and relentless pressure translate into
+                anxiety, shame, and isolation. SOS initiative exists to break
+                this silence, turning hidden suffering into open conversations,
+                shared resilience, and collective healing with the support of
+                mental health professionals.
               </p>
             </div>
             <div className="short-text-img rounded overflow-hidden">
