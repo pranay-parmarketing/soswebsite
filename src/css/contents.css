@@ -107,6 +107,26 @@
 .swiper-pagination-bullet-active {
   background: var(--red) !important; /* active dot color */
 }
+.blog-card .blog-img,
+.blog-card .background {
+  height: 200px;
+}
+.blog-card .blog-img img {
+  transition: var(--transition);
+}
+.blog-card .background {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-evenly;
+  transition: var(--transition);
+}
+.blog-card:hover .background {
+  background: #000;
+}
+.blog-card:hover img {
+  transform: scale(1.1);
+}
 @media screen and (max-width: 1200px) {
   .key-char-card {
     height: 130px;

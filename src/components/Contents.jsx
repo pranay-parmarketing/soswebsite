@@ -14,6 +14,7 @@ import logo from "../images/logo.png";
 import mindfull from "../video/mindfull.mp4";
 import faqBanner from "../images/faq-banner.webp";
 import media from "../data/media";
+import blogs from "../data/blogs";
 
 const Contents = () => {
   const { contentsRef } = useContext(AppContext);
@@ -323,6 +324,45 @@ const Contents = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="container py-5 px-2 my-5">
+        <h2 className="text-center mb-4">Blogs</h2>
+        <Swiper
+          style={{ height: "450px" }}
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={8}
+          slidesPerView={3}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          loop={true}
+          pagination={{ clickable: true }}
+          breakpoints={{
+            0: { slidesPerView: 1 },
+            576: { slidesPerView: 2 },
+            1000: { slidesPerView: 3 },
+          }}
+        >
+          {blogs.map((item, index) => {
+            return (
+              <SwiperSlide key={index}>
+                <div className="blog-card rounded overflow-hidden">
+                  <div className="blog-img overflow-hidden">
+                    <img src={item.img} alt="" />
+                  </div>
+                  <div className="background p-4">
+                    <p>{item.title}</p>
+                    <a
+                      href={item.link}
+                      className="button d-inline-block text-decoration-none mt-4"
+                      target="_blank"
+                    >
+                      Read more
+                    </a>
+                  </div>
+                </div>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
       </div>
       <div className="container-fluid py-5 px-2 my-5 background">
         <h2 className="text-center mb-4">Media feature</h2>
