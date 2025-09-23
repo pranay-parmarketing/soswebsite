@@ -36,6 +36,7 @@ const Video = () => {
 
       setTimeout(() => {
         videoElement.pause();
+        videoElement.muted = false;
         const introProgress =
           (videoElement.currentTime / videoElement.duration) * 100;
 
