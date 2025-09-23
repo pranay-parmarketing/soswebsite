@@ -104,7 +104,7 @@ const Contents = () => {
             {debtStress.map((item, index) => (
               <SwiperSlide key={index}>
                 <div className="debt-stress-card">
-                  <p className="fw-bold">{item.title}</p>
+                  <p className="red-text">{item.title}</p>
                   <p>{item.content}</p>
                 </div>
               </SwiperSlide>
@@ -274,11 +274,7 @@ const Contents = () => {
                 counselling partner, Mann Talks, for the purpose of providing
                 counselling and support services, and I confirm that I have read
                 and accept the{" "}
-                <a
-                  href="#"
-                  className="text-decoration-none"
-                  style={{ color: "#ca2e25" }}
-                >
+                <a href="#" className="text-decoration-none red-text">
                   Terms and Conditions.
                 </a>
               </label>

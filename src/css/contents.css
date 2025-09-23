@@ -59,9 +59,6 @@
   align-items: stretch;
   justify-content: space-evenly;
 }
-.debt-stress-card p:first-child {
-  color: var(--red) !important;
-}
 .form-container {
   max-width: 500px;
   width: 100%;

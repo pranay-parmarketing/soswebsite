@@ -22,9 +22,9 @@ const Footer = () => {
               <p>It's time to be heard.</p>
               <p>Let's Talk.</p>
             </div>
-            <p>#SoundsOfSilence</p>
-            <p>#DebtFreeIndia</p>
-            <p>#BreakTheSilence</p>
+            <p className="red-text">#SoundsOfSilence</p>
+            <p className="red-text">#DebtFreeIndia</p>
+            <p className="red-text">#BreakTheSilence</p>
           </div>
         </div>
         <div className="footer-bottom-flex mt-5">
