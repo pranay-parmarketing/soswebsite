@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 const App = () => {
   return (
     <AppContextProvider>
-      <Video />
+      {/* <Video /> */}
       <Contents />
       <Footer />
     </AppContextProvider>

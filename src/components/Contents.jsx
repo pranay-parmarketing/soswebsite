@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "../css/contents.css";
 import { AppContext } from "../context/AppContext";
 import sample from "../images/sample.webp";
@@ -15,29 +15,135 @@ import mindfull from "../video/mindfull.mp4";
 import faqBanner from "../images/faq-banner.webp";
 import media from "../data/media";
 import blogs from "../data/blogs";
+import bannerDesktop from "../images/banner-desktop.png";
+import bannerMobile from "../images/banner-mobile.png";
 
 const Contents = () => {
   const { contentsRef } = useContext(AppContext);
+  const [inputs, setInputs] = useState({
+    Customer_Name: "",
+    Phone_number: "",
+    E_mail: "",
+    Outstanding_Amount: "",
+    message: "",
+    consent: false,
+    CreatedOn: "",
+    Source: "",
+    process_id: "8",
+    campaign_id: "22",
+  });
+  const handleInputs = (e) => {
+    const { name, value } = e.target;
+
+    // update input value
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+
+    // clear error for this field if it exists
+    setErrors({
+      ...errors,
+      [name]: "",
+    });
+  };
+
+  const handleSupport = (e) => {
+    if (e.target.id.toLowerCase() === "support-yes") {
+      setInputs({
+        ...inputs,
+        message: "Yes, I'd like to speak with a counsellor",
+      });
+    } else if (e.target.id.toLowerCase() === "support-no") {
+      setInputs({
+        ...inputs,
+        message: "No, financial counselling only",
+      });
+    } else {
+      setInputs({
+        ...inputs,
+        message: "Not sure yet",
+      });
+    }
+  };
+
+  const handleConsent = (e) => {
+    setInputs({
+      ...inputs,
+      consent: !inputs.consent,
+    });
+  };
+
+  const [errors, setErrors] = useState({});
+  const validate = () => {
+    let newErrors = {};
+
+    // Customer_Name
+    if (!inputs.Customer_Name.trim()) {
+      newErrors.Customer_Name = "Customer name is required.";
+    } else if (!/^[a-zA-Z\s]+$/.test(inputs.Customer_Name)) {
+      newErrors.Customer_Name = "Name should contain only letters and spaces.";
+    }
+
+    // Phone_number
+    if (!inputs.Phone_number.trim()) {
+      newErrors.Phone_number = "Phone number is required.";
+    } else if (!/^\d+$/.test(inputs.Phone_number)) {
+      newErrors.Phone_number = "Phone number should contain only digits.";
+    } else if (
+      inputs.Phone_number.length < 10 ||
+      inputs.Phone_number.length > 15
+    ) {
+      newErrors.Phone_number = "Phone number should be 10–15 digits long.";
+    }
+
+    // E_mail
+    if (!inputs.E_mail.trim()) {
+      newErrors.E_mail = "Email is required.";
+    } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(inputs.E_mail)) {
+      newErrors.E_mail = "Invalid email format.";
+    }
+
+    // Outstanding_Amount
+    if (!inputs.Outstanding_Amount.trim()) {
+      newErrors.Outstanding_Amount = "Outstanding amount is required.";
+    }
+
+    // message
+    if (!inputs.message.trim()) {
+      newErrors.message = "Message is required.";
+    } else if (inputs.message.length < 5) {
+      newErrors.message = "Message must be at least 5 characters.";
+    } else if (inputs.message.length > 500) {
+      newErrors.message = "Message cannot exceed 500 characters.";
+    }
+
+    if (inputs.consent === false) {
+      newErrors.consent = "Please agree to out terms and conditions";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validate()) {
+      console.log("Form Submitted:", inputs);
+    } else {
+      console.log("Validation Failed:", errors);
+    }
+  };
 
   return (
     <div className="contents hide" ref={contentsRef}>
-      <div className="container p-2 pt-5">
-        <div className="text-center">
-          {/* <h1 className="mb-2">
-            Sounds of Silence (SOS) — An Initiative by SingleDebt
-          </h1> */}
-        </div>
-        <div className="logo-div">
-          <img src={logo} alt="" />
-        </div>
-        <div className="text-center">
-          <p>
-            Sounds of Silence is an initiative by SingleDebt to turn unspoken
-            debt burdens into conversations of hope and healing.
-          </p>
-        </div>
+      <div className="banner-desktop d-md-block d-none">
+        <img src={bannerDesktop} alt="" />
       </div>
-      <div className="container-fluid py-4 px-2 my-4 background">
+      <div className="banner-mobile d-md-none">
+        <img src={bannerMobile} alt="" />
+      </div>
+      <div className="container-fluid py-4 px-2 mb-4 background">
         <div className="container p-0">
           <div className="short-text-grid">
             <div>
@@ -129,7 +235,7 @@ const Contents = () => {
           </div>
           <div className="initiative-grid mt-5">
             <div className="movement-img rounded overflow-hidden">
-              <img src={sample} alt="" />
+              <img src={logo} alt="" />
             </div>
             <div>
               <h2 className="mb-2">Through this initiative, we aim to:</h2>
@@ -198,69 +304,119 @@ const Contents = () => {
           </p>
         </div>
         <div className="form-container my-4 mx-auto">
-          <div className="form-floating mb-4">
-            <input
-              type="text"
-              className="form-control"
-              id="fullName"
-              placeholder="Farid Ansari"
-            />
-            <label htmlFor="fullName">Full Name</label>
+          <div className="mb-4">
+            <div className="form-floating">
+              <input
+                type="text"
+                className="form-control"
+                id="fullName"
+                placeholder="Farid Ansari"
+                name="Customer_Name"
+                value={inputs.Customer_Name}
+                onChange={handleInputs}
+                autoComplete="off"
+              />
+              <label htmlFor="fullName">Full Name</label>
+            </div>
+            {errors.Customer_Name && (
+              <p className="red-text">{errors.Customer_Name}</p>
+            )}
           </div>
-          <div className="form-floating mb-4">
-            <input
-              type="tel"
-              className="form-control"
-              id="phoneNumber"
-              placeholder="XXXXX XXXXX"
-            />
-            <label htmlFor="phoneNumber">Phone Number</label>
+          <div className="mb-4">
+            <div className="form-floating">
+              <input
+                type="tel"
+                className="form-control"
+                id="phoneNumber"
+                placeholder="XXXXX XXXXX"
+                name="Phone_number"
+                value={inputs.Phone_number}
+                onChange={handleInputs}
+                autoComplete="off"
+              />
+              <label htmlFor="phoneNumber">Phone Number</label>
+            </div>
+            {errors.Phone_number && (
+              <p className="red-text">{errors.Phone_number}</p>
+            )}
           </div>
-          <div className="form-floating mb-4">
-            <input
-              type="email"
-              className="form-control"
-              id="emailAddress"
-              placeholder="farid@ansari.com"
-            />
-            <label htmlFor="emailAddress">Email address</label>
+          <div className="mb-4">
+            <div className="form-floating">
+              <input
+                type="email"
+                className="form-control"
+                id="emailAddress"
+                placeholder="farid@ansari.com"
+                name="E_mail"
+                value={inputs.E_mail}
+                onChange={handleInputs}
+                autoComplete="off"
+              />
+              <label htmlFor="emailAddress">Email address</label>
+            </div>
+            {errors.E_mail && <p className="red-text">{errors.E_mail}</p>}
           </div>
-          <div className="form-floating mb-4">
-            <select
-              className="form-select"
-              id="missedEMI"
-              aria-label="Floating label select example"
-            >
-              <option selected></option>
-              <option value="1">1-2 lakhs</option>
-              <option value="2">2-5 Lakh</option>
-              <option value="3">5-10 Lakh</option>
-              <option value="3">More than 10 lakhs</option>
-            </select>
-            <label htmlFor="missedEMI">Debt Level : Missed EMI</label>
+          <div className="mb-4">
+            <div className="form-floating">
+              <select
+                className="form-select"
+                id="missedEMI"
+                aria-label="Floating label select example"
+                name="Outstanding_Amount"
+                value={inputs.Outstanding_Amount}
+                onChange={handleInputs}
+                autoComplete="off"
+              >
+                <option value=""></option>
+                <option value="1-2 lakhs">1-2 lakhs</option>
+                <option value="2-5 Lakh">2-5 Lakh</option>
+                <option value="5-10 Lakh">5-10 Lakh</option>
+                <option value="More than 10 lakhs">More than 10 lakhs</option>
+              </select>
+              <label htmlFor="missedEMI">Debt Level : Missed EMI</label>
+            </div>
+            {errors.Outstanding_Amount && (
+              <p className="red-text">{errors.Outstanding_Amount}</p>
+            )}
           </div>
           <div className="mb-4">
             <label className="text-white">
               Are you in need of mental health support?
             </label>
             <div className="input-flex">
-              <input type="radio" name="support" id="support-yes" />
+              <input
+                type="radio"
+                name="support"
+                id="support-yes"
+                onChange={handleSupport}
+              />
               <label className="text-white" htmlFor="support-yes">
                 Yes, I'd like to speak with a counsellor
               </label>
             </div>
             <div className="input-flex">
-              <input type="radio" name="support" id="support-no" />
+              <input
+                type="radio"
+                name="support"
+                id="support-no"
+                onChange={handleSupport}
+              />
               <label className="text-white" htmlFor="support-no">
                 No, financial counselling only
               </label>
             </div>
             <div className="input-flex">
-              <input type="radio" name="support" id="support-maybe" />
+              <input
+                type="radio"
+                name="support"
+                id="support-maybe"
+                onChange={handleSupport}
+              />
               <label className="text-white" htmlFor="support-maybe">
                 Not sure yet
               </label>
             </div>
+            {errors.message && <p className="red-text">{errors.message}</p>}
           </div>
           <div className="mb-4">
             <div className="input-flex">
@@ -269,6 +425,7 @@ const Contents = () => {
                 name="consent"
                 id="consent"
                 className="mt-1"
+                onClick={handleConsent}
               />
               <label className="text-white" htmlFor="consent">
                 I hereby consent to be contacted by SingleDebt and its
@@ -280,9 +437,12 @@ const Contents = () => {
                 </a>
               </label>
             </div>
+            {errors.consent && <p className="red-text">{errors.consent}</p>}
           </div>
           <div className="text-center">
-            <button className="button">Break the silence</button>
+            <button className="button" onClick={handleSubmit}>
+              Break the silence
+            </button>
           </div>
         </div>
       </div>
