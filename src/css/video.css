@@ -7,7 +7,7 @@
   top: 0;
 }
 .animated-container.hide {
-  opacity: 0;
+  display: none;
 }
 .animated-container video {
   width: 100%;
