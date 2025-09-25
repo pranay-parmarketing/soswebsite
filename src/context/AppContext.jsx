@@ -3,7 +3,7 @@ import { createContext, useRef, useState } from "react";
 const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
-  const url = `http://localhost:8888`;
+  const url = `https://api.singledebt.in`;
   const contentsRef = useRef();
   const [source, setSource] = useState("");
   return (

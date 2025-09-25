@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../css/contents.css";
 import { AppContext } from "../context/AppContext";
-import sample from "../images/sample.webp";
 import keyChar from "../data/keyChar";
 import debtStress from "../data/debtStress";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -22,6 +21,7 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import handshake from "../images/handshake.png";
 
 const Contents = () => {
   const { url, contentsRef, source, setSource } = useContext(AppContext);
@@ -65,22 +65,6 @@ const Contents = () => {
       ...inputs,
       Messages: e.target.value,
     });
-    // if (e.target.id.toLowerCase() === "support-yes") {
-    //   setInputs({
-    //     ...inputs,
-    //     Messages: "Yes, I'd like to speak with a counsellor",
-    //   });
-    // } else if (e.target.id.toLowerCase() === "support-no") {
-    //   setInputs({
-    //     ...inputs,
-    //     Messages: "No, financial counselling only",
-    //   });
-    // } else {
-    //   setInputs({
-    //     ...inputs,
-    //     Messages: "Not sure yet",
-    //   });
-    // }
   };
 
   const handleConsent = (e) => {
@@ -114,7 +98,7 @@ const Contents = () => {
     });
   };
   const showErrorToast = () => {
-    toast.success("Something went wrong.", {
+    toast.error("Something went wrong.", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -454,171 +438,182 @@ const Contents = () => {
         </div>
       </div>
       <div className="container py-4 p-2">
-        <div className="text-center">
-          <h2>Take the First Step - Reach Out Today</h2>
-          <p>
-            You don't have to carry this silent burden of debt alone. Whether
-            it's missed EMIs or sleepless nights, help is here. Get free
-            financial & mental health counselling.
-          </p>
-        </div>
-        <div className="form-container my-4 mx-auto">
-          <div className="mb-4">
-            <div className="form-floating">
-              <input
-                type="text"
-                className="form-control"
-                id="fullName"
-                placeholder="Farid Ansari"
-                name="Customer_Name"
-                value={inputs.Customer_Name}
-                onChange={handleInputs}
-                autoComplete="off"
-              />
-              <label htmlFor="fullName">Full Name</label>
-            </div>
-            {errors.Customer_Name && (
-              <p className="red-text">{errors.Customer_Name}</p>
-            )}
+        <div className="form-grid">
+          <div className="handshake">
+            <img src={handshake} alt="" />
           </div>
-          <div className="mb-4">
-            <div className="form-floating">
-              <input
-                type="tel"
-                className="form-control"
-                id="phoneNumber"
-                placeholder="XXXXX XXXXX"
-                name="Phone"
-                value={inputs.Phone}
-                onChange={handleInputs}
-                autoComplete="off"
-              />
-              <label htmlFor="phoneNumber">Phone Number</label>
+          <div className="form-container">
+            <div className="text-center">
+              <h2>Take the First Step - Reach Out Today</h2>
+              <p>
+                You don't have to carry this silent burden of debt alone.
+                Whether it's missed EMIs or sleepless nights, help is here. Get
+                free financial & mental health counselling.
+              </p>
             </div>
-            {errors.Phone && <p className="red-text">{errors.Phone}</p>}
-          </div>
-          <div className="mb-4">
-            <div className="form-floating">
-              <input
-                type="email"
-                className="form-control"
-                id="emailAddress"
-                placeholder="farid@ansari.com"
-                name="E_mail"
-                value={inputs.E_mail}
-                onChange={handleInputs}
-                autoComplete="off"
-              />
-              <label htmlFor="emailAddress">Email address</label>
-            </div>
-            {errors.E_mail && <p className="red-text">{errors.E_mail}</p>}
-          </div>
-          <div className="mb-4">
-            <div className="form-floating">
-              <select
-                className="form-select"
-                id="missedEMI"
-                aria-label="Floating label select example"
-                name="Outstanding_Amount"
-                value={inputs.Outstanding_Amount}
-                onChange={handleInputs}
-                autoComplete="off"
-              >
-                <option value=""></option>
-                <option value="1-2 lakhs">1-2 lakhs</option>
-                <option value="2-5 Lakh">2-5 Lakh</option>
-                <option value="5-10 Lakh">5-10 Lakh</option>
-                <option value="More than 10 lakhs">More than 10 lakhs</option>
-              </select>
-              <label htmlFor="missedEMI">Debt Level : Missed EMI</label>
-            </div>
-            {errors.Outstanding_Amount && (
-              <p className="red-text">{errors.Outstanding_Amount}</p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label className="text-white">
-              Are you in need of mental health support?
-            </label>
-            <div className="input-flex">
-              <input
-                type="radio"
-                name="support"
-                id="support-yes"
-                value="support-yes"
-                onChange={handleSupport}
-                checked={inputs.Messages.toLowerCase() === "support-yes"}
-              />
-              <label className="text-white" htmlFor="support-yes">
-                Yes, I'd like to speak with a counsellor
-              </label>
-            </div>
-            <div className="input-flex">
-              <input
-                type="radio"
-                name="support"
-                id="support-no"
-                value="support-no"
-                onChange={handleSupport}
-                checked={inputs.Messages.toLowerCase() === "support-no"}
-              />
-              <label className="text-white" htmlFor="support-no">
-                No, financial counselling only
-              </label>
-            </div>
-            <div className="input-flex">
-              <input
-                type="radio"
-                name="support"
-                id="support-maybe"
-                value="support-maybe"
-                onChange={handleSupport}
-                checked={inputs.Messages.toLowerCase() === "support-maybe"}
-              />
-              <label className="text-white" htmlFor="support-maybe">
-                Not sure yet
-              </label>
-            </div>
-            {errors.Messages && <p className="red-text">{errors.Messages}</p>}
-          </div>
-          <div className="mb-4">
-            <div className="input-flex">
-              <input
-                type="checkbox"
-                name="consent"
-                id="consent"
-                className="mt-1"
-                checked={inputs.consent}
-                onChange={handleConsent}
-              />
-              <label className="text-white" htmlFor="consent">
-                I hereby consent to be contacted by SingleDebt and its
-                counselling partner, Mann Talks, for the purpose of providing
-                counselling and support services, and I confirm that I have read
-                and accept the{" "}
-                <a href="#" className="text-decoration-none red-text">
-                  Terms and Conditions.
-                </a>
-              </label>
-            </div>
-            {errors.consent && <p className="red-text">{errors.consent}</p>}
-          </div>
-          <div className="text-center">
-            <button className="button form-button" onClick={handleSubmit}>
-              {loading ? (
-                <div className="d-flex align-items-center justify-content-center gap-2">
-                  <p>Loading</p>
-                  <div
-                    className="spinner-border spinner-border-sm"
-                    role="status"
-                  >
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
+            <div className="my-4 mx-auto">
+              <div className="mb-4">
+                <div className="form-floating">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="fullName"
+                    placeholder="Farid Ansari"
+                    name="Customer_Name"
+                    value={inputs.Customer_Name}
+                    onChange={handleInputs}
+                    autoComplete="off"
+                  />
+                  <label htmlFor="fullName">Full Name</label>
                 </div>
-              ) : (
-                "Break the silence"
-              )}
-            </button>
+                {errors.Customer_Name && (
+                  <p className="red-text">{errors.Customer_Name}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <div className="form-floating">
+                  <input
+                    type="tel"
+                    className="form-control"
+                    id="phoneNumber"
+                    placeholder="XXXXX XXXXX"
+                    name="Phone"
+                    value={inputs.Phone}
+                    onChange={handleInputs}
+                    autoComplete="off"
+                  />
+                  <label htmlFor="phoneNumber">Phone Number</label>
+                </div>
+                {errors.Phone && <p className="red-text">{errors.Phone}</p>}
+              </div>
+              <div className="mb-4">
+                <div className="form-floating">
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="emailAddress"
+                    placeholder="farid@ansari.com"
+                    name="E_mail"
+                    value={inputs.E_mail}
+                    onChange={handleInputs}
+                    autoComplete="off"
+                  />
+                  <label htmlFor="emailAddress">Email address</label>
+                </div>
+                {errors.E_mail && <p className="red-text">{errors.E_mail}</p>}
+              </div>
+              <div className="mb-4">
+                <div className="form-floating">
+                  <select
+                    className="form-select"
+                    id="missedEMI"
+                    aria-label="Floating label select example"
+                    name="Outstanding_Amount"
+                    value={inputs.Outstanding_Amount}
+                    onChange={handleInputs}
+                    autoComplete="off"
+                  >
+                    <option value=""></option>
+                    <option value="1-2 lakhs">1-2 lakhs</option>
+                    <option value="2-5 Lakh">2-5 Lakh</option>
+                    <option value="5-10 Lakh">5-10 Lakh</option>
+                    <option value="More than 10 lakhs">
+                      More than 10 lakhs
+                    </option>
+                  </select>
+                  <label htmlFor="missedEMI">Debt Level : Missed EMI</label>
+                </div>
+                {errors.Outstanding_Amount && (
+                  <p className="red-text">{errors.Outstanding_Amount}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <label className="text-white">
+                  Are you in need of mental health support?
+                </label>
+                <div className="input-flex">
+                  <input
+                    type="radio"
+                    name="support"
+                    id="support-yes"
+                    value="support-yes"
+                    onChange={handleSupport}
+                    checked={inputs.Messages.toLowerCase() === "support-yes"}
+                  />
+                  <label className="text-white" htmlFor="support-yes">
+                    Yes, I'd like to speak with a counsellor
+                  </label>
+                </div>
+                <div className="input-flex">
+                  <input
+                    type="radio"
+                    name="support"
+                    id="support-no"
+                    value="support-no"
+                    onChange={handleSupport}
+                    checked={inputs.Messages.toLowerCase() === "support-no"}
+                  />
+                  <label className="text-white" htmlFor="support-no">
+                    No, financial counselling only
+                  </label>
+                </div>
+                <div className="input-flex">
+                  <input
+                    type="radio"
+                    name="support"
+                    id="support-maybe"
+                    value="support-maybe"
+                    onChange={handleSupport}
+                    checked={inputs.Messages.toLowerCase() === "support-maybe"}
+                  />
+                  <label className="text-white" htmlFor="support-maybe">
+                    Not sure yet
+                  </label>
+                </div>
+                {errors.Messages && (
+                  <p className="red-text">{errors.Messages}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <div className="input-flex">
+                  <input
+                    type="checkbox"
+                    name="consent"
+                    id="consent"
+                    className="mt-1"
+                    checked={inputs.consent}
+                    onChange={handleConsent}
+                  />
+                  <label className="text-white" htmlFor="consent">
+                    I hereby consent to be contacted by SingleDebt and its
+                    counselling partner, Mann Talks, for the purpose of
+                    providing counselling and support services, and I confirm
+                    that I have read and accept the{" "}
+                    <a href="#" className="text-decoration-none red-text">
+                      Terms and Conditions.
+                    </a>
+                  </label>
+                </div>
+                {errors.consent && <p className="red-text">{errors.consent}</p>}
+              </div>
+              <div className="text-center">
+                <button className="button form-button" onClick={handleSubmit}>
+                  {loading ? (
+                    <div className="d-flex align-items-center justify-content-center gap-2">
+                      <p>Loading</p>
+                      <div
+                        className="spinner-border spinner-border-sm"
+                        role="status"
+                      >
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  ) : (
+                    "Break the silence"
+                  )}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -754,7 +749,7 @@ const Contents = () => {
                 </h2>
                 <div
                   id="collapseOne"
-                  className="accordion-collapse collapse"
+                  className="accordion-collapse collapse show"
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body">

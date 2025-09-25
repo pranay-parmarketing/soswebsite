@@ -1,11 +1,11 @@
-/* .contents {
+.contents {
   position: relative;
   z-index: 2;
 }
 .contents.hide {
   position: fixed;
   top: 100vh;
-} */
+}
 .banner-desktop img {
   width: 100%;
   height: 100%;
@@ -71,10 +71,6 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: space-evenly;
-}
-.form-container {
-  max-width: 500px;
-  width: 100%;
 }
 .mann-talk-logo {
   width: 400px;
@@ -148,6 +144,13 @@
   width: 180px;
   height: 40px;
 }
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
 @media screen and (max-width: 1200px) {
   .key-char-card {
     height: 130px;
@@ -181,6 +184,13 @@
   }
   .short-text-grid {
     grid-template-columns: 1fr;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .handshake {
+    max-width: 500px;
+    margin: 0 auto;
   }
 }
 @media screen and (max-width: 768px) {

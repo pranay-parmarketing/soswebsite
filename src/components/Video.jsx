@@ -166,7 +166,10 @@ const Video = () => {
   return (
     <div className="animated-container" ref={animatedContainerRef}>
       <video ref={videoRef} playsInline preload="auto">
-        <source src={video} type="video/mp4" />
+        <source
+          src="https://pranay-parmarketing.github.io/sosvideo/sos.mp4"
+          type="video/mp4"
+        />
       </video>
 
       <div className="swipe-up-lottie" ref={lottieRef}>

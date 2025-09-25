@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 const App = () => {
   return (
     <AppContextProvider>
-      {/* <Video /> */}
+      <Video />
       <Contents />
       <Footer />
     </AppContextProvider>
@@ -17,11 +17,3 @@ const App = () => {
 };
 
 export default App;
-
-// Outstanding
-// Full_Name
-// Email
-// Phone_Number
-// Sources
-// Lead_Created_Time
-// Messages
