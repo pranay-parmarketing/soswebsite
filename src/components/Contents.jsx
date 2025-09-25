@@ -61,22 +61,26 @@ const Contents = () => {
   };
 
   const handleSupport = (e) => {
-    if (e.target.id.toLowerCase() === "support-yes") {
-      setInputs({
-        ...inputs,
-        Messages: "Yes, I'd like to speak with a counsellor",
-      });
-    } else if (e.target.id.toLowerCase() === "support-no") {
-      setInputs({
-        ...inputs,
-        Messages: "No, financial counselling only",
-      });
-    } else {
-      setInputs({
-        ...inputs,
-        Messages: "Not sure yet",
-      });
-    }
+    setInputs({
+      ...inputs,
+      Messages: e.target.value,
+    });
+    // if (e.target.id.toLowerCase() === "support-yes") {
+    //   setInputs({
+    //     ...inputs,
+    //     Messages: "Yes, I'd like to speak with a counsellor",
+    //   });
+    // } else if (e.target.id.toLowerCase() === "support-no") {
+    //   setInputs({
+    //     ...inputs,
+    //     Messages: "No, financial counselling only",
+    //   });
+    // } else {
+    //   setInputs({
+    //     ...inputs,
+    //     Messages: "Not sure yet",
+    //   });
+    // }
   };
 
   const handleConsent = (e) => {
@@ -96,7 +100,7 @@ const Contents = () => {
     }
   };
 
-  const showToast = () => {
+  const showSuccessToast = () => {
     toast.success("Data Submitted!", {
       position: "top-right",
       autoClose: 5000,
@@ -109,7 +113,21 @@ const Contents = () => {
       transition: Bounce,
     });
   };
+  const showErrorToast = () => {
+    toast.success("Something went wrong.", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
 
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const validate = () => {
     let newErrors = {};
@@ -170,9 +188,32 @@ const Contents = () => {
     //
     const token = await getToken();
     if (validate()) {
-      await handleDialer(newDate);
-      await handleZoho(token, newDate);
-      showToast();
+      try {
+        setLoading(true);
+        const dailerStatus = await handleDialer(newDate);
+        const zohoStatus = await handleZoho(token, newDate);
+        if (dailerStatus || zohoStatus) {
+          showSuccessToast();
+          setInputs({
+            Customer_Name: "",
+            Phone: "",
+            E_mail: "",
+            Outstanding_Amount: "",
+            Messages: "",
+            consent: false,
+            Created_On: "",
+            Source: source ? source : "SOS_LP_Campaign",
+            process_id: "4",
+            campaign_id: "6",
+          });
+        } else {
+          showErrorToast();
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -203,6 +244,11 @@ const Contents = () => {
         }
       );
       console.log(res.data, "Dialer");
+      if (res.data.response_status.toLowerCase() === "success") {
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       console.log(error);
     }
@@ -237,6 +283,11 @@ const Contents = () => {
         }
       );
       console.log(res.data, "ZOHO");
+      if (res.data.data[0].code.toLowerCase() === "success") {
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       console.log(error);
     }
@@ -494,7 +545,9 @@ const Contents = () => {
                 type="radio"
                 name="support"
                 id="support-yes"
+                value="support-yes"
                 onChange={handleSupport}
+                checked={inputs.Messages.toLowerCase() === "support-yes"}
               />
               <label className="text-white" htmlFor="support-yes">
                 Yes, I'd like to speak with a counsellor
@@ -505,7 +558,9 @@ const Contents = () => {
                 type="radio"
                 name="support"
                 id="support-no"
+                value="support-no"
                 onChange={handleSupport}
+                checked={inputs.Messages.toLowerCase() === "support-no"}
               />
               <label className="text-white" htmlFor="support-no">
                 No, financial counselling only
@@ -516,7 +571,9 @@ const Contents = () => {
                 type="radio"
                 name="support"
                 id="support-maybe"
+                value="support-maybe"
                 onChange={handleSupport}
+                checked={inputs.Messages.toLowerCase() === "support-maybe"}
               />
               <label className="text-white" htmlFor="support-maybe">
                 Not sure yet
@@ -531,7 +588,8 @@ const Contents = () => {
                 name="consent"
                 id="consent"
                 className="mt-1"
-                onClick={handleConsent}
+                checked={inputs.consent}
+                onChange={handleConsent}
               />
               <label className="text-white" htmlFor="consent">
                 I hereby consent to be contacted by SingleDebt and its
@@ -546,8 +604,20 @@ const Contents = () => {
             {errors.consent && <p className="red-text">{errors.consent}</p>}
           </div>
           <div className="text-center">
-            <button className="button" onClick={handleSubmit}>
-              Break the silence
+            <button className="button form-button" onClick={handleSubmit}>
+              {loading ? (
+                <div className="d-flex align-items-center justify-content-center gap-2">
+                  <p>Loading</p>
+                  <div
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                  >
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              ) : (
+                "Break the silence"
+              )}
             </button>
           </div>
         </div>
