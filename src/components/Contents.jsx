@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../css/contents.css";
 import { AppContext } from "../context/AppContext";
 import sample from "../images/sample.webp";
@@ -12,25 +12,37 @@ import { Navigation, Pagination, Autoplay, FreeMode } from "swiper/modules";
 import mannTalksLogo from "../images/mann-talks-logo.png";
 import logo from "../images/logo.png";
 import mindfull from "../video/mindfull.mp4";
-import faqBanner from "../images/faq-banner.webp";
+import faqBanner from "../images/faq-banner.png";
 import media from "../data/media";
 import blogs from "../data/blogs";
 import bannerDesktop from "../images/banner-desktop.png";
 import bannerMobile from "../images/banner-mobile.png";
+import soundOfSilence from "../images/sound-of-silence.png";
+import axios from "axios";
+import { useSearchParams } from "react-router-dom";
+import { Bounce, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Contents = () => {
-  const { contentsRef } = useContext(AppContext);
+  const { url, contentsRef, source, setSource } = useContext(AppContext);
+  //
+  const [searchParams] = useSearchParams();
+  const utmSource = searchParams.get("utm_source");
+  useEffect(() => {
+    setSource(utmSource);
+  }, [utmSource]);
+  //
   const [inputs, setInputs] = useState({
     Customer_Name: "",
-    Phone_number: "",
+    Phone: "",
     E_mail: "",
     Outstanding_Amount: "",
-    message: "",
+    Messages: "",
     consent: false,
-    CreatedOn: "",
-    Source: "",
-    process_id: "8",
-    campaign_id: "22",
+    Created_On: "",
+    Source: source ? source : "SOS_LP_Campaign",
+    process_id: "4",
+    campaign_id: "6",
   });
   const handleInputs = (e) => {
     const { name, value } = e.target;
@@ -52,17 +64,17 @@ const Contents = () => {
     if (e.target.id.toLowerCase() === "support-yes") {
       setInputs({
         ...inputs,
-        message: "Yes, I'd like to speak with a counsellor",
+        Messages: "Yes, I'd like to speak with a counsellor",
       });
     } else if (e.target.id.toLowerCase() === "support-no") {
       setInputs({
         ...inputs,
-        message: "No, financial counselling only",
+        Messages: "No, financial counselling only",
       });
     } else {
       setInputs({
         ...inputs,
-        message: "Not sure yet",
+        Messages: "Not sure yet",
       });
     }
   };
@@ -71,6 +83,30 @@ const Contents = () => {
     setInputs({
       ...inputs,
       consent: !inputs.consent,
+    });
+  };
+
+  //
+  const getToken = async () => {
+    try {
+      const res = await axios.get(`${url}/token`);
+      return res.data.token[0].token;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const showToast = () => {
+    toast.success("Data Submitted!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
     });
   };
 
@@ -85,16 +121,13 @@ const Contents = () => {
       newErrors.Customer_Name = "Name should contain only letters and spaces.";
     }
 
-    // Phone_number
-    if (!inputs.Phone_number.trim()) {
-      newErrors.Phone_number = "Phone number is required.";
-    } else if (!/^\d+$/.test(inputs.Phone_number)) {
-      newErrors.Phone_number = "Phone number should contain only digits.";
-    } else if (
-      inputs.Phone_number.length < 10 ||
-      inputs.Phone_number.length > 15
-    ) {
-      newErrors.Phone_number = "Phone number should be 10–15 digits long.";
+    // Phone
+    if (!inputs.Phone.trim()) {
+      newErrors.Phone = "Phone number is required.";
+    } else if (!/^\d+$/.test(inputs.Phone)) {
+      newErrors.Phone = "Phone number should contain only digits.";
+    } else if (inputs.Phone.length < 10 || inputs.Phone.length > 15) {
+      newErrors.Phone = "Phone number should be 10–15 digits long.";
     }
 
     // E_mail
@@ -109,13 +142,13 @@ const Contents = () => {
       newErrors.Outstanding_Amount = "Outstanding amount is required.";
     }
 
-    // message
-    if (!inputs.message.trim()) {
-      newErrors.message = "Message is required.";
-    } else if (inputs.message.length < 5) {
-      newErrors.message = "Message must be at least 5 characters.";
-    } else if (inputs.message.length > 500) {
-      newErrors.message = "Message cannot exceed 500 characters.";
+    // Messages
+    if (!inputs.Messages.trim()) {
+      newErrors.Messages = "Message is required.";
+    } else if (inputs.Messages.length < 5) {
+      newErrors.Messages = "Message must be at least 5 characters.";
+    } else if (inputs.Messages.length > 500) {
+      newErrors.Messages = "Message cannot exceed 500 characters.";
     }
 
     if (inputs.consent === false) {
@@ -128,15 +161,90 @@ const Contents = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //
+    const dateString = new Date().toLocaleDateString();
+    const year = dateString.split("/")[2];
+    const month = dateString.split("/")[1];
+    const day = dateString.split("/")[0];
+    const newDate = `${year}-${month}-${day}`;
+    //
+    const token = await getToken();
     if (validate()) {
-      console.log("Form Submitted:", inputs);
-    } else {
-      console.log("Validation Failed:", errors);
+      await handleDialer(newDate);
+      await handleZoho(token, newDate);
+      showToast();
+    }
+  };
+
+  const handleDialer = async (newDate) => {
+    const data = {
+      data: [
+        {
+          Phone: inputs.Phone,
+          Customer_Name: inputs.Customer_Name,
+          E_mail: inputs.E_mail,
+          Messages: inputs.Messages,
+          Source: inputs.Source,
+          Created_On: newDate,
+          Outstanding_Amount: inputs.Outstanding_Amount,
+        },
+      ],
+      process_id: "4",
+      campaign_id: "6",
+    };
+    try {
+      const res = await axios.post(
+        `${url}/proxy?url=http://27.107.190.198/crm/Commonapi/BulkSend`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(res.data, "Dialer");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleZoho = async (token, newDate) => {
+    const data = {
+      data: [
+        {
+          Full_Name: inputs.Customer_Name,
+          Last_Name: inputs.Customer_Name,
+          Phone_Number: inputs.Phone,
+          Email: inputs.E_mail,
+          Messages: inputs.Messages,
+          Sources: inputs.Source,
+          Created_Time: newDate,
+          Outstanding: inputs.Outstanding_Amount,
+        },
+      ],
+      process_id: "4",
+      campaign_id: "6",
+    };
+    try {
+      const res = await axios.post(
+        `${url}/proxy?url=https://www.zohoapis.in/crm/v2/Leads`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Zoho-oauthtoken ${token}`,
+          },
+        }
+      );
+      console.log(res.data, "ZOHO");
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
     <div className="contents hide" ref={contentsRef}>
+      <ToastContainer />
       <div className="banner-desktop d-md-block d-none">
         <img src={bannerDesktop} alt="" />
       </div>
@@ -166,7 +274,7 @@ const Contents = () => {
               </p>
             </div>
             <div className="short-text-img rounded overflow-hidden">
-              <img src={sample} alt="" />
+              <img src={soundOfSilence} alt="" />
             </div>
           </div>
         </div>
@@ -329,16 +437,14 @@ const Contents = () => {
                 className="form-control"
                 id="phoneNumber"
                 placeholder="XXXXX XXXXX"
-                name="Phone_number"
-                value={inputs.Phone_number}
+                name="Phone"
+                value={inputs.Phone}
                 onChange={handleInputs}
                 autoComplete="off"
               />
               <label htmlFor="phoneNumber">Phone Number</label>
             </div>
-            {errors.Phone_number && (
-              <p className="red-text">{errors.Phone_number}</p>
-            )}
+            {errors.Phone && <p className="red-text">{errors.Phone}</p>}
           </div>
           <div className="mb-4">
             <div className="form-floating">
@@ -416,7 +522,7 @@ const Contents = () => {
                 Not sure yet
               </label>
             </div>
-            {errors.message && <p className="red-text">{errors.message}</p>}
+            {errors.Messages && <p className="red-text">{errors.Messages}</p>}
           </div>
           <div className="mb-4">
             <div className="input-flex">

@@ -31,6 +31,7 @@
 }
 .short-text-grid img {
   max-height: 400px;
+  object-fit: contain;
 }
 .mann-talk-flex {
   display: flex;

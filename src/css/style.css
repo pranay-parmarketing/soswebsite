@@ -124,6 +124,9 @@ input[type="checkbox"] {
 .red-text {
   color: var(--red) !important;
 }
+.accordion-button::after {
+  filter: invert(1) !important;
+}
 @media screen and (max-width: 768px) {
   .container {
     max-width: 100% !important;

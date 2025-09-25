@@ -18,10 +18,6 @@ const Footer = () => {
             <img src={logo} alt="" />
           </div>
           <div>
-            <div className="mb-5">
-              <p>It's time to be heard.</p>
-              <p>Let's Talk.</p>
-            </div>
             <p className="red-text">#SoundsOfSilence</p>
             <p className="red-text">#DebtFreeIndia</p>
             <p className="red-text">#BreakTheSilence</p>
