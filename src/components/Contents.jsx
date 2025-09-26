@@ -22,6 +22,8 @@ import { useSearchParams } from "react-router-dom";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import handshake from "../images/handshake.png";
+import "aos/dist/aos.css";
+import Aos from "aos";
 
 const Contents = () => {
   const { url, contentsRef, source, setSource } = useContext(AppContext);
@@ -277,19 +279,28 @@ const Contents = () => {
     }
   };
 
+  useEffect(() => {
+    Aos.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: false,
+      mirror: false,
+    });
+  }, []);
+
   return (
-    <div className="contents hide" ref={contentsRef}>
+    <div className="contents overflow-x-hidden" ref={contentsRef}>
       <ToastContainer />
-      <div className="banner-desktop d-md-block d-none">
+      <div className="banner-desktop d-md-block d-none" data-aos="fade-down">
         <img src={bannerDesktop} alt="" />
       </div>
-      <div className="banner-mobile d-md-none">
+      <div className="banner-mobile d-md-none" data-aos="fade-down">
         <img src={bannerMobile} alt="" />
       </div>
       <div className="container-fluid py-4 px-2 mb-4 background">
         <div className="container p-0">
           <div className="short-text-grid">
-            <div>
+            <div data-aos="fade-right">
               <p>
                 The Sounds of Silence (SOS) initiative uncovers and attempts to
                 soothe the mental troubles associated with the silent burden of
@@ -308,7 +319,10 @@ const Contents = () => {
                 mental health professionals.
               </p>
             </div>
-            <div className="short-text-img rounded overflow-hidden">
+            <div
+              className="short-text-img rounded overflow-hidden"
+              data-aos="fade-left"
+            >
               <img src={soundOfSilence} alt="" />
             </div>
           </div>
@@ -321,7 +335,7 @@ const Contents = () => {
         <div className="key-char-grid">
           {keyChar.map((item, index) => {
             return (
-              <div className="key-char-card" key={index}>
+              <div className="key-char-card" key={index} data-aos="zoom-in">
                 <img src={item.img} alt="" className="icon" />
                 <div>
                   <p className="red-text">{item.title}</p>
@@ -353,7 +367,7 @@ const Contents = () => {
           >
             {debtStress.map((item, index) => (
               <SwiperSlide key={index}>
-                <div className="debt-stress-card">
+                <div className="debt-stress-card" data-aos="zoom-in">
                   <p className="red-text">{item.title}</p>
                   <p>{item.content}</p>
                 </div>
@@ -364,7 +378,7 @@ const Contents = () => {
       </div>
       <div>
         <div className="container px-2 py-4 my-4">
-          <div className="text-center">
+          <div className="text-center" data-aos="fade-down">
             <h2 className="mb-2">What the Initiative Aims to Achieve</h2>
             <p>
               The Sounds of Silence (SOS) initiative, in association with Mann
@@ -377,10 +391,13 @@ const Contents = () => {
             </p>
           </div>
           <div className="initiative-grid mt-5">
-            <div className="movement-img rounded overflow-hidden">
+            <div
+              className="movement-img rounded overflow-hidden"
+              data-aos="fade-right"
+            >
               <img src={logo} alt="" />
             </div>
-            <div>
+            <div data-aos="fade-left">
               <h2 className="mb-2">Through this initiative, we aim to:</h2>
               <ul className="mb-2">
                 <li>
@@ -414,7 +431,7 @@ const Contents = () => {
       <div className="container-fluid py-4 px-2 my-4 background">
         <div className="container p-0">
           <div className="mann-talk-flex">
-            <div>
+            <div data-aos="fade-right">
               <h2 className="mb-2">About Mann Talks X SOS</h2>
               <p>
                 Established in 2020 by Vidhi Shanghvi, Mann Talks is a
@@ -430,7 +447,10 @@ const Contents = () => {
               </p>
             </div>
             <div>
-              <div className="mann-talk-logo rounded overflow-hidden">
+              <div
+                className="mann-talk-logo rounded overflow-hidden"
+                data-aos="fade-left"
+              >
                 <img src={mannTalksLogo} alt="" />
               </div>
             </div>
@@ -439,10 +459,10 @@ const Contents = () => {
       </div>
       <div className="container py-4 p-2">
         <div className="form-grid">
-          <div className="handshake">
+          <div className="handshake" data-aos="zoom-in">
             <img src={handshake} alt="" />
           </div>
-          <div className="form-container">
+          <div className="form-container" data-aos="zoom-in">
             <div className="text-center">
               <h2>Take the First Step - Reach Out Today</h2>
               <p>
@@ -620,7 +640,7 @@ const Contents = () => {
       <div className="container-fluid py-4 px-2 my-4 background">
         <div className="container p-0">
           <div className="mindfull-grid">
-            <div>
+            <div data-aos="fade-right">
               <h2 className="mb-2">Mindfulness Audio Series</h2>
               <p>
                 Mindfulness Mann Se is a self-help program built by Mann Talks,
@@ -637,7 +657,7 @@ const Contents = () => {
                 well-being.
               </p>
             </div>
-            <div>
+            <div data-aos="fade-left">
               <div className="mindfull-video text-center">
                 <video playsInline controls className="rounded overflow-hidden">
                   <source src={mindfull} type="video/mp4" />
@@ -675,7 +695,10 @@ const Contents = () => {
           {blogs.map((item, index) => {
             return (
               <SwiperSlide key={index}>
-                <div className="blog-card rounded overflow-hidden">
+                <div
+                  className="blog-card rounded overflow-hidden"
+                  data-aos="zoom-in"
+                >
                   <div className="blog-img overflow-hidden">
                     <img src={item.img} alt="" />
                   </div>
@@ -695,7 +718,10 @@ const Contents = () => {
           })}
         </Swiper>
       </div>
-      <div className="container-fluid py-4 px-2 my-4 background">
+      <div
+        className="container-fluid py-4 px-2 my-4 background"
+        data-aos="zoom-out"
+      >
         <h2 className="text-center mb-4">Media feature</h2>
         <Swiper
           modules={[Autoplay, FreeMode]}
@@ -729,10 +755,10 @@ const Contents = () => {
           FAQs - Sounds of Silence (SOS) Initiative
         </h2>
         <div className="faq-grid">
-          <div className="rounded overflow-hidden">
+          <div className="rounded overflow-hidden" data-aos="fade-up">
             <img src={faqBanner} alt="" />
           </div>
-          <div>
+          <div data-aos="zoom-in">
             <div className="accordion" id="accordionExample">
               <div className="accordion-item">
                 <h2 className="accordion-header">
