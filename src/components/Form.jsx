@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import handshake from "../images/handshake.png";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -408,9 +408,12 @@ const Form = () => {
                     counselling partner, Mann Talks, for the purpose of
                     providing counselling and support services, and I confirm
                     that I have read and accept the{" "}
-                    <a href="#" className="text-decoration-none red-text">
+                    <Link
+                      to="/termsandconditions"
+                      className="text-decoration-none red-text"
+                    >
                       Terms and Conditions.
-                    </a>
+                    </Link>
                   </label>
                 </div>
                 {errors.consent && <p className="red-text">{errors.consent}</p>}

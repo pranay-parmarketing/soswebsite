@@ -8,17 +8,17 @@ import "swiper/css/pagination";
 import "aos/dist/aos.css";
 //
 import Aos from "aos";
-import Banner from "./Banner";
-import ShortText from "./ShortText";
-import WeightOfDebt from "./WeightOfDebt";
-import DebtStress from "./DebtStress";
-import Initiative from "./Initiative";
-import MannTalks from "./MannTalks";
-import Form from "./Form";
-import Mindful from "./Mindful";
-import Blogs from "./Blogs";
-import Media from "./Media";
-import FAQ from "./FAQ";
+import Banner from "../components/Banner";
+import ShortText from "../components/ShortText";
+import WeightOfDebt from "../components/WeightOfDebt";
+import DebtStress from "../components/DebtStress";
+import Initiative from "../components/Initiative";
+import MannTalks from "../components/MannTalks";
+import Form from "../components/Form";
+import Mindful from "../components/Mindful";
+import Blogs from "../components/Blogs";
+import Media from "../components/Media";
+import FAQ from "../components/FAQ";
 
 const Contents = () => {
   const { contentsRef } = useContext(AppContext);
@@ -33,7 +33,7 @@ const Contents = () => {
   }, []);
 
   return (
-    <div className="contents overflow-x-hidden" ref={contentsRef}>
+    <div className="contents  overflow-x-hidden" ref={contentsRef}>
       <Banner />
       <ShortText />
       <WeightOfDebt />

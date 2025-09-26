@@ -2,7 +2,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
 import "./css/style.css";
 import { AppContextProvider } from "./context/AppContext";
-import Contents from "./components/Contents";
+import Contents from "./pages/Contents.jsx";
 import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 import TermsAndCondition from "./pages/TermsAndCondition";

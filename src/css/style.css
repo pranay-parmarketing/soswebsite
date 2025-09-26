@@ -50,7 +50,8 @@ li {
   margin: 0;
   color: #fff !important;
 }
-ul {
+ul,
+ol {
   margin-bottom: 0;
 }
 .button {
