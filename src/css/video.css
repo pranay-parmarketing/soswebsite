@@ -8,6 +8,7 @@
 }
 .animated-container.hide {
   display: none;
+  visibility: hidden;
 }
 .animated-container video {
   width: 100%;

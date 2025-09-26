@@ -3,8 +3,8 @@
   z-index: 2;
 }
 .contents.hide {
-  position: fixed;
-  top: 100vh;
+  display: none;
+  visibility: hidden;
 }
 .banner-desktop img {
   width: 100%;
