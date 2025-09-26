@@ -5,8 +5,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 //
-import "aos/dist/aos.css";
-//
 import Banner from "../components/Banner";
 import ShortText from "../components/ShortText";
 import WeightOfDebt from "../components/WeightOfDebt";
