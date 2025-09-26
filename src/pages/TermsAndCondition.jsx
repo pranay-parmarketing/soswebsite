@@ -1,9 +1,16 @@
 import React from "react";
+import { FaHome } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const TermsAndCondition = () => {
   return (
     <div className="container py-4 px-2">
-      <h1 className="red-text mb-4 text-center">TERMS AND CONDITIONS</h1>
+      <div className="d-flex align-items-center justify-content-between">
+        <h1 className="red-text mb-4 text-center">TERMS AND CONDITIONS</h1>
+        <Link to="/" className="button text-decoration-none">
+          Home <FaHome />{" "}
+        </Link>
+      </div>
 
       <div className="mb-4">
         <p>Effective Date: 27th September 2025</p>

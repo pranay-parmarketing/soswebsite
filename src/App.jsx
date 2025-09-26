@@ -7,15 +7,17 @@ import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 import TermsAndCondition from "./pages/TermsAndCondition";
 import Video from "./components/Video.jsx";
+import RefreshButton from "./components/RefreshButton.jsx";
 
 const App = () => {
   return (
     <AppContextProvider>
-      {/* <Video /> */}
+      <Video />
       <Routes>
         <Route path="/" element={<Contents />} />
         <Route path="/termsandconditions" element={<TermsAndCondition />} />
       </Routes>
+      <RefreshButton />
       <Footer />
     </AppContextProvider>
   );

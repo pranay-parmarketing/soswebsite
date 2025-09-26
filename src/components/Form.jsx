@@ -411,6 +411,7 @@ const Form = () => {
                     <Link
                       to="/termsandconditions"
                       className="text-decoration-none red-text"
+                      target="_blank"
                     >
                       Terms and Conditions.
                     </Link>

@@ -6,7 +6,7 @@ import swipeUp from "../lottie/swipe-up.json";
 import Lottie from "react-lottie";
 
 const Video = () => {
-  const { contentsRef } = useContext(AppContext);
+  const { contentsRef, refreshButtonRef } = useContext(AppContext);
   const videoRef = useRef(null);
   const animatedContainerRef = useRef(null);
   const lottieRef = useRef(null);
@@ -135,6 +135,7 @@ const Video = () => {
             animatedContainerRef.current.classList.remove("hide");
             contentsRef.current.classList.remove("hide");
             document.body.style.overflow = "auto";
+            refreshButtonRef.current.classList.remove("d-none");
           }
           return;
         }
@@ -167,7 +168,7 @@ const Video = () => {
     <div className="animated-container" ref={animatedContainerRef}>
       <video ref={videoRef} playsInline preload="auto">
         <source
-          src="https://pranay-parmarketing.github.io/sosvideo/sos.mp4"
+          src="https://singledebt.in/wp-content/uploads/2025/09/sosvid-sd.mp4"
           type="video/mp4"
         />
       </video>

@@ -33,7 +33,7 @@ const Contents = () => {
   }, []);
 
   return (
-    <div className="contents  overflow-x-hidden" ref={contentsRef}>
+    <div className="contents hide overflow-x-hidden" ref={contentsRef}>
       <Banner />
       <ShortText />
       <WeightOfDebt />
