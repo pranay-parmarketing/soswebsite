@@ -278,7 +278,7 @@ const Contents = () => {
   };
 
   return (
-    <div className="contents" ref={contentsRef}>
+    <div className="contents hide" ref={contentsRef}>
       <ToastContainer />
       <div className="banner-desktop d-md-block d-none">
         <img src={bannerDesktop} alt="" />
