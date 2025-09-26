@@ -78,14 +78,14 @@
 .mann-talk-logo img {
   transform: scale(0.75);
 }
-.mindfull-grid {
+.mindful-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   justify-content: space-between;
   gap: 48px;
 }
-.mindfull-video video {
+.mindful-video video {
   width: 100%;
 }
 .faq-grid {
@@ -158,7 +158,7 @@
   .faq-grid > div:first-child img {
     min-height: 340px;
   }
-  .mindfull-grid {
+  .mindful-grid {
     grid-template-columns: 1fr;
   }
 }

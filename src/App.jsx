@@ -2,15 +2,20 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
 import "./css/style.css";
 import { AppContextProvider } from "./context/AppContext";
-import Video from "./components/Video";
 import Contents from "./components/Contents";
 import Footer from "./components/Footer";
+import { Routes, Route } from "react-router-dom";
+import TermsAndCondition from "./pages/TermsAndCondition";
+import Video from "./components/Video.jsx";
 
 const App = () => {
   return (
     <AppContextProvider>
       {/* <Video /> */}
-      <Contents />
+      <Routes>
+        <Route path="/" element={<Contents />} />
+        <Route path="/termsandconditions" element={<TermsAndCondition />} />
+      </Routes>
       <Footer />
     </AppContextProvider>
   );
