@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import "../css/video.css";
-import video from "../video/video.mp4";
+import video from "../video/compressed.mp4";
 import { AppContext } from "../context/AppContext";
 import swipeUp from "../lottie/swipe-up.json";
 import Lottie from "react-lottie";
@@ -166,10 +166,7 @@ const Video = () => {
   return (
     <div className="animated-container" ref={animatedContainerRef}>
       <video ref={videoRef} playsInline preload="auto">
-        <source
-          src="https://pranay-parmarketing.github.io/sosvideo/sos.mp4"
-          type="video/mp4"
-        />
+        <source src={video} type="video/mp4" />
       </video>
 
       <div className="swipe-up-lottie" ref={lottieRef}>
