@@ -1,3 +1,6 @@
+footer {
+  z-index: 5 !important;
+}
 .footer-top-flex,
 .footer-bottom-flex {
   display: flex;
