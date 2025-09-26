@@ -25,10 +25,7 @@ const Blogs = () => {
           {blogs.map((item, index) => {
             return (
               <SwiperSlide key={index}>
-                <div
-                  className="blog-card rounded overflow-hidden"
-                  data-aos="zoom-in"
-                >
+                <div className="blog-card rounded overflow-hidden">
                   <div className="blog-img overflow-hidden">
                     <img src={item.img} alt="" />
                   </div>

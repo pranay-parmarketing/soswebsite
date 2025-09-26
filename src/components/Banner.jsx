@@ -5,10 +5,10 @@ import bannerMobile from "../images/banner-mobile.png";
 const Banner = () => {
   return (
     <>
-      <div className="banner-desktop d-md-block d-none" data-aos="fade-down">
+      <div className="banner-desktop d-md-block d-none">
         <img src={bannerDesktop} alt="" />
       </div>
-      <div className="banner-mobile d-md-none" data-aos="fade-down">
+      <div className="banner-mobile d-md-none">
         <img src={bannerMobile} alt="" />
       </div>
     </>

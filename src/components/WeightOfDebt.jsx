@@ -11,7 +11,7 @@ const WeightOfDebt = () => {
         <div className="key-char-grid">
           {keyChar.map((item, index) => {
             return (
-              <div className="key-char-card" key={index} data-aos="zoom-in">
+              <div className="key-char-card" key={index}>
                 <img src={item.img} alt="" className="icon" />
                 <div>
                   <p className="red-text">{item.title}</p>

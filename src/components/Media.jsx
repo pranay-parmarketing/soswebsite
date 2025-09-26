@@ -6,10 +6,7 @@ import media from "../data/media";
 const Media = () => {
   return (
     <>
-      <div
-        className="container-fluid py-4 px-2 my-4 background"
-        data-aos="zoom-out"
-      >
+      <div className="container-fluid py-4 px-2 my-4 background">
         <h2 className="text-center mb-4">Media feature</h2>
         <Swiper
           modules={[Autoplay, FreeMode]}

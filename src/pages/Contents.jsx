@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import "../css/contents.css";
 import "swiper/css";
@@ -7,7 +7,6 @@ import "swiper/css/pagination";
 //
 import "aos/dist/aos.css";
 //
-import Aos from "aos";
 import Banner from "../components/Banner";
 import ShortText from "../components/ShortText";
 import WeightOfDebt from "../components/WeightOfDebt";
@@ -22,15 +21,6 @@ import FAQ from "../components/FAQ";
 
 const Contents = () => {
   const { contentsRef } = useContext(AppContext);
-  //
-  useEffect(() => {
-    Aos.init({
-      duration: 1000,
-      easing: "ease-in-out",
-      once: false,
-      mirror: false,
-    });
-  }, []);
 
   return (
     <div className="contents hide overflow-x-hidden" ref={contentsRef}>

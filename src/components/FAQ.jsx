@@ -9,10 +9,10 @@ const FAQ = () => {
           FAQs - Sounds of Silence (SOS) Initiative
         </h2>
         <div className="faq-grid">
-          <div className="rounded overflow-hidden" data-aos="fade-up">
+          <div className="rounded overflow-hidden">
             <img src={faqBanner} alt="" />
           </div>
-          <div data-aos="zoom-in">
+          <div>
             <div className="accordion" id="accordionExample">
               <div className="accordion-item">
                 <h2 className="accordion-header">

@@ -7,7 +7,7 @@ const MannTalks = () => {
       <div className="container-fluid py-4 px-2 my-4 background">
         <div className="container p-0">
           <div className="mann-talk-flex">
-            <div data-aos="fade-right">
+            <div>
               <h2 className="mb-2">About Mann Talks X SOS</h2>
               <p>
                 Established in 2020 by Vidhi Shanghvi, Mann Talks is a
@@ -23,10 +23,7 @@ const MannTalks = () => {
               </p>
             </div>
             <div>
-              <div
-                className="mann-talk-logo rounded overflow-hidden"
-                data-aos="fade-left"
-              >
+              <div className="mann-talk-logo rounded overflow-hidden">
                 <img src={mannTalksLogo} alt="" />
               </div>
             </div>

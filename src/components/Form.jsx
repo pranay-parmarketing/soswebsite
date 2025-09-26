@@ -258,10 +258,10 @@ const Form = () => {
       <ToastContainer />
       <div className="container py-4 p-2">
         <div className="form-grid">
-          <div className="handshake" data-aos="zoom-in">
+          <div className="handshake">
             <img src={handshake} alt="" />
           </div>
-          <div className="form-container" data-aos="zoom-in">
+          <div className="form-container">
             <div className="text-center">
               <h2>Take the First Step - Reach Out Today</h2>
               <p>

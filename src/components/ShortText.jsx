@@ -7,7 +7,7 @@ const ShortText = () => {
       <div className="container-fluid py-4 px-2 mb-4 background">
         <div className="container p-0">
           <div className="short-text-grid">
-            <div data-aos="fade-right">
+            <div>
               <p>
                 The Sounds of Silence (SOS) initiative uncovers and attempts to
                 soothe the mental troubles associated with the silent burden of
@@ -26,10 +26,7 @@ const ShortText = () => {
                 mental health professionals.
               </p>
             </div>
-            <div
-              className="short-text-img rounded overflow-hidden"
-              data-aos="fade-left"
-            >
+            <div className="short-text-img rounded overflow-hidden">
               <img src={soundOfSilence} alt="" />
             </div>
           </div>

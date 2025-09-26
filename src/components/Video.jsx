@@ -61,7 +61,7 @@ const Video = () => {
 
     const handleWheel = (e) => {
       if (!duration) return;
-      const delta = e.deltaY > 0 ? 1 : -1;
+      const delta = e.deltaY > 0 ? 0.12 : -0.12;
       progressTarget.current = Math.min(
         100,
         Math.max(0, progressTarget.current + delta)
@@ -132,6 +132,7 @@ const Video = () => {
           videoElement.currentTime = duration;
 
           if (animatedContainerRef.current && contentsRef.current) {
+            window.scrollTo(0, 0);
             animatedContainerRef.current.classList.remove("hide");
             contentsRef.current.classList.remove("hide");
             document.body.style.overflow = "auto";

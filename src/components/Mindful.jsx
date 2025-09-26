@@ -7,7 +7,7 @@ const Mindful = () => {
       <div className="container-fluid py-4 px-2 my-4 background">
         <div className="container p-0">
           <div className="mindful-grid">
-            <div data-aos="fade-right">
+            <div>
               <h2 className="mb-2">Mindfulness Audio Series</h2>
               <p>
                 Mindfulness Mann Se is a self-help program built by Mann Talks,
@@ -24,7 +24,7 @@ const Mindful = () => {
                 well-being.
               </p>
             </div>
-            <div data-aos="fade-left">
+            <div>
               <div className="mindful-video text-center">
                 <video playsInline controls className="rounded overflow-hidden">
                   <source src={mindful} type="video/mp4" />

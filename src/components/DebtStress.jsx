@@ -27,7 +27,7 @@ const DebtStress = () => {
           >
             {debtStress.map((item, index) => (
               <SwiperSlide key={index}>
-                <div className="debt-stress-card" data-aos="zoom-in">
+                <div className="debt-stress-card">
                   <p className="red-text">{item.title}</p>
                   <p>{item.content}</p>
                 </div>

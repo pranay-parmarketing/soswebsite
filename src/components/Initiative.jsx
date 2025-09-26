@@ -5,7 +5,7 @@ const Initiative = () => {
   return (
     <>
       <div className="container px-2 py-4 my-4">
-        <div className="text-center" data-aos="fade-down">
+        <div className="text-center">
           <h2 className="mb-2">What the Initiative Aims to Achieve</h2>
           <p>
             The Sounds of Silence (SOS) initiative, in association with Mann
@@ -18,13 +18,10 @@ const Initiative = () => {
           </p>
         </div>
         <div className="initiative-grid mt-5">
-          <div
-            className="movement-img rounded overflow-hidden"
-            data-aos="fade-right"
-          >
+          <div className="movement-img rounded overflow-hidden">
             <img src={logo} alt="" />
           </div>
-          <div data-aos="fade-left">
+          <div>
             <h2 className="mb-2">Through this initiative, we aim to:</h2>
             <ul className="mb-2">
               <li>
