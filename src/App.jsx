@@ -13,7 +13,7 @@ const App = () => {
   const location = useLocation();
   return (
     <AppContextProvider>
-      {location.pathname === "/" && <Video />}
+      {/* {location.pathname === "/" && <Video />} */}
       <Routes>
         <Route path="/" element={<Contents />} />
         <Route path="/termsandconditions" element={<TermsAndCondition />} />

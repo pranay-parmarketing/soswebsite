@@ -23,21 +23,21 @@ const Mindful = () => {
                 restlessness and enhance our mood and general sense of peace,
                 greater life satisfaction and overall well-being.
               </p>
+              <div className="mt-4">
+                <a
+                  href="https://www.manntalks.org/mindfulness/basics-introduction/how-to-use-these-resources/"
+                  target="_blank"
+                  className="button d-inline-block text-decoration-none"
+                >
+                  Click Here To Start Listening
+                </a>
+              </div>
             </div>
             <div>
               <div className="mindful-video text-center">
                 <video playsInline controls className="rounded overflow-hidden">
                   <source src={mindful} type="video/mp4" />
                 </video>
-              </div>
-              <div className="text-center">
-                <a
-                  href="https://www.manntalks.org/mindfulness/basics-introduction/how-to-use-these-resources/"
-                  target="_blank"
-                  className="button d-inline-block text-decoration-none mt-2"
-                >
-                  Click Here To Start Listening
-                </a>
               </div>
             </div>
           </div>
