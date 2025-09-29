@@ -194,7 +194,7 @@ const Video = () => {
     <div className="animated-container" ref={animatedContainerRef}>
       <video ref={videoRef} playsInline preload="auto">
         <source
-          src="https://singledebt.in/wp-content/uploads/2025/09/sosvid-sd.mp4"
+          src="https://singledebt.in/wp-content/uploads/2025/09/sosvid_4-1.mp4"
           type="video/mp4"
         />
       </video>
