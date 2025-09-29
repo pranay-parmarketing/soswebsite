@@ -20,6 +20,10 @@ const Initiative = () => {
         <div className="initiative-grid mt-5">
           <div className="movement-img rounded overflow-hidden">
             <img src={logo} alt="" />
+            <p className="text-center mt-4">
+              Sounds of Silence is an initiative by SingleDebt to turn unspoken
+              debt burdens into conversations of hope and healing.{" "}
+            </p>
           </div>
           <div>
             <h2 className="mb-2">Through this initiative, we aim to:</h2>
@@ -30,8 +34,8 @@ const Initiative = () => {
               </li>
               <li>
                 Free & Confidential Helpline - Speak openly with mental health
-                professionals and receive on-call help 24x7 without fear or
-                judgment.
+                professionals and receive on-call help 9 AM to 8 PM, all days
+                without fear or judgment.
               </li>
               <li>
                 Learning Mindfulness - Access self-help tool like Mindfulness
@@ -44,7 +48,7 @@ const Initiative = () => {
                 duration) to share your troubles and devise your path to peace
                 with trained psychologists (master's degree in Clinical
                 (non-RCI) or Counselling Psychology from premier educational
-                institutions)
+                institutions).
               </li>
             </ul>
           </div>

@@ -266,8 +266,9 @@ const Form = () => {
               <h2>Take the First Step - Reach Out Today</h2>
               <p>
                 You don't have to carry this silent burden of debt alone.
-                Whether it's missed EMIs or sleepless nights, help is here. Get
-                free financial & mental health counselling.
+                Whether it's missed EMIs or sleepless nights, help is here.
+                <br />
+                Get free financial & mental health counselling.
               </p>
             </div>
             <div className="my-4 mx-auto">
@@ -432,7 +433,7 @@ const Form = () => {
                       </div>
                     </div>
                   ) : (
-                    "Break the silence"
+                    "It's time to be heard"
                   )}
                 </button>
               </div>

@@ -16,12 +16,12 @@ const Mindful = () => {
                 enhance your well-being. This audio series offers interactive
                 learning, guided practice, and insights that will deepen your
                 understanding and application of mindfulness in real-life
-                situations. Mindfulness practice has been proven to help have
-                better self-regulation, improve our physical and psychological
-                health, boost memory and focus, reduce stress, anxiety,
-                reactivity, and restlessness and enhance our mood and general
-                sense of peace, greater life satisfaction and overall
-                well-being.
+                situations. <br />
+                <br /> Mindfulness practice has been proven to help have better
+                self-regulation, improve our physical and psychological health,
+                boost memory and focus, reduce stress, anxiety, reactivity, and
+                restlessness and enhance our mood and general sense of peace,
+                greater life satisfaction and overall well-being.
               </p>
             </div>
             <div>
@@ -32,7 +32,7 @@ const Mindful = () => {
               </div>
               <div className="text-center">
                 <a
-                  href="https://www.youtube.com/watch?v=CrDEtB0KFPM&list=PLMMPLX-QoD5vpgbZSuvQQbnpG36th3C_k"
+                  href="https://www.manntalks.org/mindfulness/basics-introduction/how-to-use-these-resources/"
                   target="_blank"
                   className="button d-inline-block text-decoration-none mt-2"
                 >

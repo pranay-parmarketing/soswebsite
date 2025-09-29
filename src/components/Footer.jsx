@@ -4,6 +4,7 @@ import {
   FaFacebook,
   FaInstagram,
   FaLinkedin,
+  FaPinterest,
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
@@ -33,6 +34,7 @@ const Footer = () => {
           </div>
           <div className="mx-auto">
             <div className="text-sm-end text-center">
+              <p className="mb-2">Let's Talk.</p>
               <p className="red-text">#SoundsOfSilence</p>
               <p className="red-text">#DebtFreeIndia</p>
               <p className="red-text">#BreakTheSilence</p>
@@ -43,27 +45,44 @@ const Footer = () => {
               </div>
               <ul className="social-links">
                 <li>
-                  <a href="#">
+                  <a href="https://www.facebook.com/SingleDebt" target="_blank">
                     <FaFacebook />
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a
+                    href="https://www.instagram.com/singledebt/"
+                    target="_blank"
+                  >
                     <FaInstagram />
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a
+                    href="https://www.linkedin.com/company/singledebt/"
+                    target="_blank"
+                  >
                     <FaLinkedin />
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="https://x.com/Single_Debt" target="_blank">
                     <FaTwitter />
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a
+                    href="https://in.pinterest.com/singledebt/"
+                    target="_blank"
+                  >
+                    <FaPinterest />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.youtube.com/@SingleDebt/videos "
+                    target="_blank"
+                  >
                     <FaYoutube />
                   </a>
                 </li>
@@ -101,8 +120,8 @@ const Footer = () => {
         style={{ background: "#000" }}
       >
         <p className="text-uppercase">
-          &copy; COPYRIGHT 2025 ALL RIGHTS RESERVED | SINGLEDEBT | DEBT-FREE
-          INDIA
+          &copy; COPYRIGHT 2025 ALL RIGHTS RESERVED | SINGLEDEBT | DEBT FREE
+          INDIA | Sounds Of Silence
         </p>
       </div>
     </footer>

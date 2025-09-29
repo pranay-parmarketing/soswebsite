@@ -7,9 +7,7 @@ const DebtStress = () => {
   return (
     <>
       <div className="container py-4 mb-5 px-2">
-        <h2 className="text-center mb-4">
-          Debt Stress Leading to Mental Health Struggles
-        </h2>
+        <h2 className="text-center mb-4">Debt Stress : Every Day Harassment</h2>
         <div>
           <Swiper
             style={{ height: "200px" }}
