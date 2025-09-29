@@ -32,10 +32,10 @@ const Form = () => {
     });
   };
   //
-  const handleSupport = (e) => {
+  const handleMessage = (e) => {
     setInputs({
       ...inputs,
-      Messages: e.target.value,
+      Messages: !inputs.Messages,
     });
   };
   const handleConsent = (e) => {
@@ -121,17 +121,8 @@ const Form = () => {
       newErrors.Outstanding_Amount = "Outstanding amount is required.";
     }
 
-    // Messages
-    if (!inputs.Messages.trim()) {
-      newErrors.Messages = "Message is required.";
-    } else if (inputs.Messages.length < 5) {
-      newErrors.Messages = "Message must be at least 5 characters.";
-    } else if (inputs.Messages.length > 500) {
-      newErrors.Messages = "Message cannot exceed 500 characters.";
-    }
-
     if (inputs.consent === false) {
-      newErrors.consent = "Please agree to out terms and conditions";
+      newErrors.consent = "Please agree to our terms and conditions";
     }
 
     setErrors(newErrors);
@@ -223,7 +214,7 @@ const Form = () => {
           Last_Name: inputs.Customer_Name,
           Phone_Number: inputs.Phone,
           Email: inputs.E_mail,
-          Messages: inputs.Messages,
+          Messages: inputs.Messages === true ? "Yes" : "No",
           Sources: inputs.Source,
           Created_Time: newDate,
           Outstanding: inputs.Outstanding_Amount,
@@ -348,46 +339,17 @@ const Form = () => {
                 )}
               </div>
               <div className="mb-4">
-                <label className="text-white">
-                  Are you in need of mental health support?
-                </label>
                 <div className="input-flex">
                   <input
-                    type="radio"
-                    name="support"
-                    id="support-yes"
-                    value="support-yes"
-                    onChange={handleSupport}
-                    checked={inputs.Messages.toLowerCase() === "support-yes"}
+                    type="checkbox"
+                    name="Messages"
+                    id="Messages"
+                    className="mt-1"
+                    checked={inputs.Messages}
+                    onChange={handleMessage}
                   />
-                  <label className="text-white" htmlFor="support-yes">
-                    Yes, I'd like to speak with a counsellor
-                  </label>
-                </div>
-                <div className="input-flex">
-                  <input
-                    type="radio"
-                    name="support"
-                    id="support-no"
-                    value="support-no"
-                    onChange={handleSupport}
-                    checked={inputs.Messages.toLowerCase() === "support-no"}
-                  />
-                  <label className="text-white" htmlFor="support-no">
-                    No, financial counselling only
-                  </label>
-                </div>
-                <div className="input-flex">
-                  <input
-                    type="radio"
-                    name="support"
-                    id="support-maybe"
-                    value="support-maybe"
-                    onChange={handleSupport}
-                    checked={inputs.Messages.toLowerCase() === "support-maybe"}
-                  />
-                  <label className="text-white" htmlFor="support-maybe">
-                    Not sure yet
+                  <label className="text-white" htmlFor="Messages">
+                    Are you in need of mental health support?
                   </label>
                 </div>
                 {errors.Messages && (

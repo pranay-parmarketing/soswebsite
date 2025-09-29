@@ -14,7 +14,7 @@ const App = () => {
   const location = useLocation();
   return (
     <AppContextProvider>
-      {/* {location.pathname === "/" && <Video />} */}
+      {location.pathname === "/" && <Video />}
       <Navbar />
       <Routes>
         <Route path="/" element={<Contents />} />
