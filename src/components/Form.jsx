@@ -261,7 +261,7 @@ const Form = () => {
           <div className="handshake">
             <img src={handshake} alt="" />
           </div>
-          <div className="form-container">
+          <div className="form-container" id="sos-form">
             <div className="text-center">
               <h2>Take the First Step - Reach Out Today</h2>
               <p>

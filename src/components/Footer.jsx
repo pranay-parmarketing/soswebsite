@@ -9,14 +9,25 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import logo from "../images/logo.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <footer className="container-fluid background p-0">
       <div className="container p-2 pt-5">
         <div className="footer-top-flex">
-          <div className="footer-logo mx-auto">
-            <img src={logo} alt="" />
+          <div>
+            <div className="footer-logo mx-auto">
+              <img src={logo} alt="" />
+            </div>
+            <div className="text-center">
+              <a
+                href="#sos-form"
+                className="button d-inline-block text-decoration-none"
+              >
+                Let's talk
+              </a>
+            </div>
           </div>
           <div className="d-lg-block d-none">
             <p>
@@ -34,12 +45,11 @@ const Footer = () => {
           </div>
           <div className="mx-auto">
             <div className="text-sm-end text-center">
-              <p className="mb-2">Let's Talk.</p>
               <p className="red-text">#SoundsOfSilence</p>
               <a
                 href="https://singledebt.in/debt-free-india"
                 target="_blank"
-                className="red-text text-decoration-none"
+                className="red-text"
               >
                 #DebtFreeIndia
               </a>
@@ -93,6 +103,15 @@ const Footer = () => {
                   </a>
                 </li>
               </ul>
+              <div className="text-sm-end text-center mt-4">
+                <Link
+                  to="/termsandconditions"
+                  className="d-inline-block red-text text-decoration-none"
+                  target="_blank"
+                >
+                  Terms & Conditions
+                </Link>
+              </div>
             </div>
           </div>
         </div>

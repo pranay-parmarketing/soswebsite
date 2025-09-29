@@ -53,6 +53,15 @@ const Initiative = () => {
                 institutions).
               </li>
             </ul>
+
+            <div className="text-center">
+              <a
+                href="#sos-form"
+                className="d-inline-block button text-decoration-none"
+              >
+                Let's Talk
+              </a>
+            </div>
           </div>
         </div>
       </div>
