@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import { FaPlay } from "react-icons/fa";
 
 const RefreshButton = () => {
   const { refreshButtonRef } = useContext(AppContext);
@@ -14,7 +13,7 @@ const RefreshButton = () => {
       onClick={refreshButton}
       ref={refreshButtonRef}
     >
-      <FaPlay />
+      Replay Video
     </button>
   );
 };

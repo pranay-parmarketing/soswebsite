@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import "../css/video.css";
-import video from "../video/video.mp4";
 import { AppContext } from "../context/AppContext";
 import swipeUp from "../lottie/swipe-up.json";
 import Lottie from "react-lottie";
@@ -13,14 +12,42 @@ const Video = () => {
 
   const [duration, setDuration] = useState(0);
   const [progressDisplay, setProgressDisplay] = useState(0);
+  const [videoFinished, setVideoFinished] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
+  const [audioEnabled, setAudioEnabled] = useState(false);
 
   const progress = useRef(0);
   const progressTarget = useRef(0);
   const lastTouchY = useRef(0);
   const lastUpdateTime = useRef(0);
 
-  const [videoFinished, setVideoFinished] = useState(false);
-  const [introDone, setIntroDone] = useState(false);
+  // 🔑 Helper: Finish video
+  const finishVideo = () => {
+    const videoElement = videoRef.current;
+
+    setVideoFinished(true);
+    if (animatedContainerRef.current) {
+      animatedContainerRef.current.style.height = 0;
+    }
+    window.scrollTo(0, 0);
+
+    progress.current = 100;
+    progressTarget.current = 100;
+
+    if (videoElement && duration) {
+      videoElement.currentTime = duration;
+    }
+
+    if (animatedContainerRef.current && contentsRef.current) {
+      animatedContainerRef.current.classList.remove("hide");
+      contentsRef.current.classList.remove("hide");
+      document.body.style.overflow = "auto";
+    }
+
+    if (refreshButtonRef.current) {
+      refreshButtonRef.current.classList.remove("d-none");
+    }
+  };
 
   // Load video duration + autoplay intro
   useEffect(() => {
@@ -30,22 +57,20 @@ const Video = () => {
     const handleLoadedMetadata = () => {
       setDuration(videoElement.duration);
 
-      // ✅ autoplay first 2s
+      // autoplay intro muted
       videoElement.muted = true;
       videoElement.play();
 
       setTimeout(() => {
         videoElement.pause();
-        videoElement.muted = false;
         const introProgress =
           (videoElement.currentTime / videoElement.duration) * 100;
 
-        // Sync scrubbing state with current time
         progress.current = introProgress;
         progressTarget.current = introProgress;
         setProgressDisplay(introProgress);
 
-        setIntroDone(true); // now allow scrubbing
+        setIntroDone(true); // allow scrubbing
       }, 900);
     };
 
@@ -55,13 +80,13 @@ const Video = () => {
     };
   }, []);
 
-  // Desktop: scroll updates target progress
+  // Desktop: wheel scroll
   useEffect(() => {
     if (videoFinished || !introDone) return;
 
     const handleWheel = (e) => {
       if (!duration) return;
-      const delta = e.deltaY > 0 ? 0.12 : -0.12;
+      const delta = e.deltaY > 0 ? 0.13 : -0.13;
       progressTarget.current = Math.min(
         100,
         Math.max(0, progressTarget.current + delta)
@@ -72,7 +97,7 @@ const Video = () => {
     return () => window.removeEventListener("wheel", handleWheel);
   }, [duration, videoFinished, introDone]);
 
-  // Mobile: touch updates target progress
+  // Mobile: touch scroll
   useEffect(() => {
     if (videoFinished || !introDone) return;
 
@@ -101,7 +126,7 @@ const Video = () => {
     };
   }, [duration, videoFinished, introDone]);
 
-  // Smooth animation loop for scrubbing
+  // Smooth animation loop
   useEffect(() => {
     const videoElement = videoRef.current;
     let animationFrame;
@@ -120,24 +145,15 @@ const Video = () => {
         if (time - lastUpdateTime.current > 60) {
           videoElement.currentTime = (progress.current / 100) * duration;
           lastUpdateTime.current = time;
+
+          // ✅ If audio is enabled, keep video playing with sound
+          if (audioEnabled && videoElement.paused) {
+            videoElement.play().catch(() => {});
+          }
         }
 
         if (progress.current >= 99.9) {
-          setVideoFinished(true);
-          animatedContainerRef.current.style.height = 0;
-          window.scrollTo(0, 0);
-
-          progress.current = 100;
-          progressTarget.current = 100;
-          videoElement.currentTime = duration;
-
-          if (animatedContainerRef.current && contentsRef.current) {
-            window.scrollTo(0, 0);
-            animatedContainerRef.current.classList.remove("hide");
-            contentsRef.current.classList.remove("hide");
-            document.body.style.overflow = "auto";
-            refreshButtonRef.current.classList.remove("d-none");
-          }
+          finishVideo();
           return;
         }
 
@@ -153,9 +169,18 @@ const Video = () => {
 
     animationFrame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrame);
-  }, [duration, videoFinished, introDone]);
+  }, [duration, videoFinished, introDone, audioEnabled]);
 
-  //
+  // Enable audio on button click
+  const enableAudio = () => {
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      videoElement.muted = false;
+      videoElement.play().catch(() => {});
+      setAudioEnabled(true);
+    }
+  };
+
   const swipeUpLottie = {
     loop: true,
     autoplay: true,
@@ -173,6 +198,20 @@ const Video = () => {
           type="video/mp4"
         />
       </video>
+
+      {/* 🔊 Enable Audio Button */}
+      {/* {!audioEnabled && introDone && !videoFinished && (
+        <button className="button enable-audio" onClick={enableAudio}>
+          🔊 Enable Sound
+        </button>
+      )} */}
+
+      {/* ⏭ Skip Video Button */}
+      {introDone && !videoFinished && (
+        <button className="button skip-video" onClick={finishVideo}>
+          Skip video
+        </button>
+      )}
 
       <div className="swipe-up-lottie" ref={lottieRef}>
         <Lottie options={swipeUpLottie} />
