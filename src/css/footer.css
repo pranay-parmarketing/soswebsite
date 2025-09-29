@@ -1,6 +1,9 @@
 footer {
   z-index: 5 !important;
 }
+footer * {
+  font-family: "regular";
+}
 .footer-top-flex {
   display: flex;
   align-items: flex-start;

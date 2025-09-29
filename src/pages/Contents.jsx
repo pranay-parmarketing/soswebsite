@@ -21,7 +21,7 @@ const Contents = () => {
   const { contentsRef } = useContext(AppContext);
 
   return (
-    <div className="contents hide overflow-x-hidden" ref={contentsRef}>
+    <div className="contents overflow-x-hidden" ref={contentsRef}>
       <Banner />
       <ShortText />
       <WeightOfDebt />
@@ -31,7 +31,7 @@ const Contents = () => {
       <Form />
       <Mindful />
       <Blogs />
-      <Media />
+      {/* <Media /> */}
       <FAQ />
     </div>
   );

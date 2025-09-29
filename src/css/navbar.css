@@ -1,0 +1,14 @@
+.sos-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+.sos-navbar-logo {
+  width: 100px;
+  padding: 8px;
+  transition: var(--transition);
+}
+.sos-navbar-logo.active {
+  background: #00000080;
+}

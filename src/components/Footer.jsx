@@ -36,7 +36,13 @@ const Footer = () => {
             <div className="text-sm-end text-center">
               <p className="mb-2">Let's Talk.</p>
               <p className="red-text">#SoundsOfSilence</p>
-              <p className="red-text">#DebtFreeIndia</p>
+              <a
+                href="https://singledebt.in/debt-free-india"
+                target="_blank"
+                className="red-text text-decoration-none"
+              >
+                #DebtFreeIndia
+              </a>
               <p className="red-text">#BreakTheSilence</p>
             </div>
             <div className="footer-top-right mt-4">

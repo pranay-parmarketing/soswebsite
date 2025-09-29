@@ -26,7 +26,9 @@ const Initiative = () => {
             </p>
           </div>
           <div>
-            <h2 className="mb-2">Through this initiative, we aim to:</h2>
+            <h2 className="mb-2">
+              Through this initiative, we aim to achieve:
+            </h2>
             <ul className="mb-2">
               <li>
                 Free Counselling For All - Provide free financial and mental

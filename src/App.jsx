@@ -8,12 +8,14 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import TermsAndCondition from "./pages/TermsAndCondition";
 import Video from "./components/Video.jsx";
 import RefreshButton from "./components/RefreshButton.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 const App = () => {
   const location = useLocation();
   return (
     <AppContextProvider>
-      {location.pathname === "/" && <Video />}
+      {/* {location.pathname === "/" && <Video />} */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<Contents />} />
         <Route path="/termsandconditions" element={<TermsAndCondition />} />
