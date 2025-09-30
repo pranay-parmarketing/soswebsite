@@ -6,15 +6,18 @@
   position: sticky;
   top: 0;
 }
+
 .animated-container.hide {
   display: none;
   visibility: hidden;
 }
+
 .animated-container video {
   width: 100%;
   height: 100vh;
   object-fit: cover;
 }
+
 .swipe-up-lottie {
   width: 400px;
   height: auto;
@@ -24,33 +27,115 @@
   transform: translateY(-50%);
   animation: swipe-up 3s ease-in-out forwards;
 }
+
 @keyframes swipe-up {
   0% {
     opacity: 0;
   }
+
   10% {
     opacity: 0;
   }
+
   20% {
     opacity: 1;
   }
+
   90% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
     display: none;
   }
 }
+
 .enable-audio-btn {
   position: fixed;
   left: 8px;
   bottom: 8px;
   z-index: 5;
 }
+
 .skip-video {
   position: fixed;
   right: 8px;
   bottom: 8px;
   z-index: 5;
+}
+
+
+
+
+
+/* Sound Prompt Modal */
+.sound-prompt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.sound-prompt-modal {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.sound-prompt-modal h3 {
+  margin: 0 0 15px 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.sound-prompt-modal p {
+  margin: 0 0 25px 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.sound-prompt-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.sound-yes,
+.sound-no {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sound-yes {
+  background: #4CAF50;
+  color: white;
+}
+
+.sound-yes:hover {
+  background: #45a049;
+}
+
+.sound-no {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.sound-no:hover {
+  background: #e0e0e0;
 }
