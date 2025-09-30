@@ -139,3 +139,58 @@
 .sound-no:hover {
   background: #e0e0e0;
 }
+
+
+/* Play/Pause Indicator for Mobile */
+.play-pause-indicator {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  color: rgba(255, 255, 255, 0.9);
+  pointer-events: none;
+  z-index: 100;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+}
+
+.play-pause-indicator.playing,
+.play-pause-indicator.paused {
+  animation: fadeInOut 0.6s ease;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}
+
+/* Adjust modal for mobile tap prompt */
+.sound-prompt-modal h3 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.sound-prompt-modal p {
+  font-size: 18px;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
