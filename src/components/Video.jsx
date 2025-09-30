@@ -248,6 +248,8 @@ const Video = () => {
   const lastUpdateTime = useRef(0);
   const isScrolling = useRef(false);
   const scrollTimeout = useRef(null);
+  const velocity = useRef(0);
+  const lastMoveTime = useRef(0);
 
   // 🔑 Helper: Finish video
   const finishVideo = () => {
@@ -324,66 +326,124 @@ const Video = () => {
     }
   };
 
-  // Desktop: wheel scroll
+  // Desktop: wheel scroll (works for both mouse wheel and trackpad)
   useEffect(() => {
     if (videoFinished || !introDone) return;
 
     const handleWheel = (e) => {
       if (!duration) return;
 
+      e.preventDefault();
+
       isScrolling.current = true;
       clearTimeout(scrollTimeout.current);
       scrollTimeout.current = setTimeout(() => {
         isScrolling.current = false;
       }, 150);
 
-      const delta = e.deltaY > 0 ? 0.13 : -0.13;
+      // Detect trackpad vs mouse wheel
+      // Trackpad typically has smaller deltaY values and more frequent events
+      const isTrackpad = Math.abs(e.deltaY) < 50;
+
+      // Adjust sensitivity based on input type
+      const sensitivity = isTrackpad ? 0.03 : 0.15;
+      const delta = e.deltaY > 0 ? sensitivity : -sensitivity;
+
       progressTarget.current = Math.min(
         100,
         Math.max(0, progressTarget.current + delta)
       );
     };
 
-    window.addEventListener("wheel", handleWheel, { passive: true });
+    // Use non-passive listener to allow preventDefault
+    const container = animatedContainerRef.current;
+    if (container) {
+      container.addEventListener("wheel", handleWheel, { passive: false });
+    }
+
     return () => {
-      window.removeEventListener("wheel", handleWheel);
+      if (container) {
+        container.removeEventListener("wheel", handleWheel);
+      }
       clearTimeout(scrollTimeout.current);
     };
   }, [duration, videoFinished, introDone]);
 
-  // Mobile: touch scroll
+  // Mobile: improved touch scroll with momentum
   useEffect(() => {
     if (videoFinished || !introDone) return;
 
     const handleTouchStart = (e) => {
       lastTouchY.current = e.touches[0].clientY;
+      velocity.current = 0;
+      lastMoveTime.current = Date.now();
     };
 
     const handleTouchMove = (e) => {
       if (!duration) return;
 
+      e.preventDefault(); // Prevent page scroll
+
       isScrolling.current = true;
       clearTimeout(scrollTimeout.current);
-      scrollTimeout.current = setTimeout(() => {
-        isScrolling.current = false;
-      }, 150);
 
       const currentY = e.touches[0].clientY;
       const deltaY = lastTouchY.current - currentY;
-      const delta = deltaY * 0.05;
+      const currentTime = Date.now();
+      const timeDelta = currentTime - lastMoveTime.current;
+
+      // Calculate velocity for momentum
+      if (timeDelta > 0) {
+        velocity.current = deltaY / timeDelta;
+      }
+
+      // Improved sensitivity for mobile
+      const sensitivity = 0.08;
+      const delta = deltaY * sensitivity;
+
       progressTarget.current = Math.min(
         100,
         Math.max(0, progressTarget.current + delta)
       );
+
       lastTouchY.current = currentY;
+      lastMoveTime.current = currentTime;
+
+      scrollTimeout.current = setTimeout(() => {
+        isScrolling.current = false;
+        velocity.current = 0;
+      }, 150);
     };
 
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    const handleTouchEnd = () => {
+      // Apply momentum after touch ends
+      if (Math.abs(velocity.current) > 0.1) {
+        const momentum = velocity.current * 20; // Amplify momentum
+        progressTarget.current = Math.min(
+          100,
+          Math.max(0, progressTarget.current + momentum)
+        );
+      }
+
+      setTimeout(() => {
+        isScrolling.current = false;
+        velocity.current = 0;
+      }, 100);
+    };
+
+    const container = animatedContainerRef.current;
+    if (container) {
+      container.addEventListener("touchstart", handleTouchStart, { passive: true });
+      container.addEventListener("touchmove", handleTouchMove, { passive: false });
+      container.addEventListener("touchend", handleTouchEnd, { passive: true });
+    }
 
     return () => {
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
+      if (container) {
+        container.removeEventListener("touchstart", handleTouchStart);
+        container.removeEventListener("touchmove", handleTouchMove);
+        container.removeEventListener("touchend", handleTouchEnd);
+      }
       clearTimeout(scrollTimeout.current);
     };
   }, [duration, videoFinished, introDone]);
@@ -400,9 +460,10 @@ const Video = () => {
       }
 
       if (introDone && !videoFinished) {
-        // Smooth progress interpolation
+        // Smooth progress interpolation with adaptive easing
         const diff = progressTarget.current - progress.current;
-        progress.current += diff * 0.08;
+        const easing = isScrolling.current ? 0.15 : 0.08;
+        progress.current += diff * easing;
         setProgressDisplay(progress.current);
 
         const targetTime = (progress.current / 100) * duration;
@@ -431,7 +492,7 @@ const Video = () => {
             lastUpdateTime.current = time;
           }
         } else {
-          // Silent mode
+          // Silent mode: more responsive
           if (time - lastUpdateTime.current > 16) {
             videoElement.currentTime = targetTime;
             lastUpdateTime.current = time;
@@ -469,7 +530,9 @@ const Video = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
   const isMobile = window.innerWidth < 768;
+
   return (
     <div className="animated-container" ref={animatedContainerRef}>
       <video ref={videoRef} playsInline preload="auto">
