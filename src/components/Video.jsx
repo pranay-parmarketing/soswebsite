@@ -250,6 +250,8 @@ const Video = () => {
   const scrollTimeout = useRef(null);
   const velocity = useRef(0);
   const lastMoveTime = useRef(0);
+  const isTouching = useRef(false);
+  const accumulatedDelta = useRef(0);
 
   // 🔑 Helper: Finish video
   const finishVideo = () => {
@@ -302,7 +304,6 @@ const Video = () => {
         setProgressDisplay(introProgress);
 
         setIntroDone(true);
-        // Show sound prompt after intro
         setShowSoundPrompt(true);
       }, 900);
     };
@@ -320,42 +321,66 @@ const Video = () => {
 
     if (enableSound && videoElement) {
       videoElement.muted = false;
+      videoElement.volume = 1.0;
       setAudioEnabled(true);
     } else {
       setAudioEnabled(false);
     }
   };
 
-  // Desktop: wheel scroll (works for both mouse wheel and trackpad)
+  // Desktop: improved wheel/trackpad scroll
   useEffect(() => {
     if (videoFinished || !introDone) return;
+
+    let wheelTimeout;
+    let lastWheelTime = 0;
 
     const handleWheel = (e) => {
       if (!duration) return;
 
       e.preventDefault();
 
+      const now = Date.now();
+      const timeSinceLastWheel = now - lastWheelTime;
+      lastWheelTime = now;
+
       isScrolling.current = true;
       clearTimeout(scrollTimeout.current);
-      scrollTimeout.current = setTimeout(() => {
-        isScrolling.current = false;
-      }, 150);
+      clearTimeout(wheelTimeout);
 
-      // Detect trackpad vs mouse wheel
-      // Trackpad typically has smaller deltaY values and more frequent events
-      const isTrackpad = Math.abs(e.deltaY) < 50;
+      // Improved trackpad detection
+      const isLikelyTrackpad = Math.abs(e.deltaY) < 100 && timeSinceLastWheel < 50;
 
-      // Adjust sensitivity based on input type
-      const sensitivity = isTrackpad ? 0.03 : 0.15;
-      const delta = e.deltaY > 0 ? sensitivity : -sensitivity;
+      // Enhanced sensitivity with smoother accumulation
+      let sensitivity;
+      if (isLikelyTrackpad) {
+        // Trackpad: very smooth, small increments
+        sensitivity = 0.015;
+      } else {
+        // Mouse wheel: larger steps
+        sensitivity = 0.2;
+      }
 
+      const delta = e.deltaY * sensitivity;
+      accumulatedDelta.current += delta;
+
+      // Apply accumulated delta
       progressTarget.current = Math.min(
         100,
         Math.max(0, progressTarget.current + delta)
       );
+
+      // Decay accumulated delta
+      wheelTimeout = setTimeout(() => {
+        accumulatedDelta.current *= 0.9;
+      }, 10);
+
+      scrollTimeout.current = setTimeout(() => {
+        isScrolling.current = false;
+        accumulatedDelta.current = 0;
+      }, 200);
     };
 
-    // Use non-passive listener to allow preventDefault
     const container = animatedContainerRef.current;
     if (container) {
       container.addEventListener("wheel", handleWheel, { passive: false });
@@ -366,39 +391,43 @@ const Video = () => {
         container.removeEventListener("wheel", handleWheel);
       }
       clearTimeout(scrollTimeout.current);
+      clearTimeout(wheelTimeout);
     };
   }, [duration, videoFinished, introDone]);
 
-  // Mobile: improved touch scroll with momentum
+  // Mobile: completely revamped touch handling
   useEffect(() => {
     if (videoFinished || !introDone) return;
 
     const handleTouchStart = (e) => {
+      isTouching.current = true;
       lastTouchY.current = e.touches[0].clientY;
       velocity.current = 0;
       lastMoveTime.current = Date.now();
+
+      // Stop any momentum
+      isScrolling.current = false;
+      clearTimeout(scrollTimeout.current);
     };
 
     const handleTouchMove = (e) => {
-      if (!duration) return;
+      if (!duration || !isTouching.current) return;
 
-      e.preventDefault(); // Prevent page scroll
-
-      isScrolling.current = true;
-      clearTimeout(scrollTimeout.current);
+      e.preventDefault();
 
       const currentY = e.touches[0].clientY;
       const deltaY = lastTouchY.current - currentY;
       const currentTime = Date.now();
-      const timeDelta = currentTime - lastMoveTime.current;
+      const timeDelta = Math.max(currentTime - lastMoveTime.current, 1);
 
-      // Calculate velocity for momentum
-      if (timeDelta > 0) {
-        velocity.current = deltaY / timeDelta;
-      }
+      // Active scrolling
+      isScrolling.current = true;
 
-      // Improved sensitivity for mobile
-      const sensitivity = 0.08;
+      // Calculate velocity
+      velocity.current = deltaY / timeDelta;
+
+      // More responsive touch sensitivity
+      const sensitivity = 0.12;
       const delta = deltaY * sensitivity;
 
       progressTarget.current = Math.min(
@@ -408,27 +437,25 @@ const Video = () => {
 
       lastTouchY.current = currentY;
       lastMoveTime.current = currentTime;
-
-      scrollTimeout.current = setTimeout(() => {
-        isScrolling.current = false;
-        velocity.current = 0;
-      }, 150);
     };
 
     const handleTouchEnd = () => {
-      // Apply momentum after touch ends
-      if (Math.abs(velocity.current) > 0.1) {
-        const momentum = velocity.current * 20; // Amplify momentum
+      isTouching.current = false;
+
+      // Apply strong momentum
+      if (Math.abs(velocity.current) > 0.15) {
+        const momentum = velocity.current * 25;
         progressTarget.current = Math.min(
           100,
           Math.max(0, progressTarget.current + momentum)
         );
       }
 
-      setTimeout(() => {
+      // Keep scrolling active for a bit longer for audio
+      scrollTimeout.current = setTimeout(() => {
         isScrolling.current = false;
         velocity.current = 0;
-      }, 100);
+      }, 300);
     };
 
     const container = animatedContainerRef.current;
@@ -436,6 +463,7 @@ const Video = () => {
       container.addEventListener("touchstart", handleTouchStart, { passive: true });
       container.addEventListener("touchmove", handleTouchMove, { passive: false });
       container.addEventListener("touchend", handleTouchEnd, { passive: true });
+      container.addEventListener("touchcancel", handleTouchEnd, { passive: true });
     }
 
     return () => {
@@ -443,15 +471,17 @@ const Video = () => {
         container.removeEventListener("touchstart", handleTouchStart);
         container.removeEventListener("touchmove", handleTouchMove);
         container.removeEventListener("touchend", handleTouchEnd);
+        container.removeEventListener("touchcancel", handleTouchEnd);
       }
       clearTimeout(scrollTimeout.current);
     };
   }, [duration, videoFinished, introDone]);
 
-  // Smooth animation loop
+  // Smooth animation loop with improved audio handling
   useEffect(() => {
     const videoElement = videoRef.current;
     let animationFrame;
+    let audioPlayPromise = null;
 
     const animate = (time) => {
       if (!videoElement || !duration) {
@@ -460,46 +490,57 @@ const Video = () => {
       }
 
       if (introDone && !videoFinished) {
-        // Smooth progress interpolation with adaptive easing
+        // Ultra-smooth progress interpolation
         const diff = progressTarget.current - progress.current;
-        const easing = isScrolling.current ? 0.15 : 0.08;
+        const easing = isScrolling.current ? 0.18 : 0.06;
         progress.current += diff * easing;
         setProgressDisplay(progress.current);
 
         const targetTime = (progress.current / 100) * duration;
 
         if (audioEnabled) {
-          // Audio mode: smoother updates
-          if (time - lastUpdateTime.current > 32) {
-            const timeDiff = targetTime - videoElement.currentTime;
+          // Enhanced audio mode for mobile
+          const timeDiff = targetTime - videoElement.currentTime;
 
-            if (Math.abs(timeDiff) > 0.05) {
-              videoElement.currentTime = targetTime;
-            }
+          // Always update video position when difference is significant
+          if (Math.abs(timeDiff) > 0.03) {
+            videoElement.currentTime = targetTime;
+          }
 
-            // Play audio only when scrolling
-            if (isScrolling.current) {
-              if (videoElement.paused) {
-                videoElement.playbackRate = 1.0;
-                videoElement.play().catch(() => { });
+          // Play audio while actively scrolling OR during momentum
+          if (isScrolling.current || Math.abs(diff) > 0.1) {
+            if (videoElement.paused) {
+              // Ensure proper playback rate
+              videoElement.playbackRate = 1.0;
+
+              // Handle play promise properly
+              if (!audioPlayPromise) {
+                audioPlayPromise = videoElement.play().catch((err) => {
+                  console.log("Audio play prevented:", err);
+                  audioPlayPromise = null;
+                });
+
+                if (audioPlayPromise) {
+                  audioPlayPromise.then(() => {
+                    audioPlayPromise = null;
+                  }).catch(() => {
+                    audioPlayPromise = null;
+                  });
+                }
               }
-            } else {
-              if (!videoElement.paused) {
-                videoElement.pause();
-              }
             }
-
-            lastUpdateTime.current = time;
+          } else {
+            // Only pause when completely stopped
+            if (!videoElement.paused && Math.abs(diff) < 0.05) {
+              videoElement.pause();
+              audioPlayPromise = null;
+            }
           }
         } else {
-          // Silent mode: more responsive
-          if (time - lastUpdateTime.current > 16) {
-            videoElement.currentTime = targetTime;
-            lastUpdateTime.current = time;
-
-            if (!videoElement.paused) {
-              videoElement.pause();
-            }
+          // Silent mode: instant updates
+          videoElement.currentTime = targetTime;
+          if (!videoElement.paused) {
+            videoElement.pause();
           }
         }
 
@@ -519,7 +560,14 @@ const Video = () => {
     };
 
     animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      if (audioPlayPromise) {
+        audioPlayPromise.then(() => {
+          if (videoElement) videoElement.pause();
+        }).catch(() => { });
+      }
+    };
   }, [duration, videoFinished, introDone, audioEnabled]);
 
   const swipeUpLottie = {
