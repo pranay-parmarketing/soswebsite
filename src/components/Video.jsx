@@ -469,12 +469,16 @@ const Video = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
-
+  const isMobile = window.innerWidth < 768;
   return (
     <div className="animated-container" ref={animatedContainerRef}>
       <video ref={videoRef} playsInline preload="auto">
         <source
-          src="https://singledebt.in/wp-content/uploads/2025/09/2190237412106096179sosvid_4_wo_music_.mp4"
+          src={
+            isMobile
+              ? "https://singledebt.in/wp-content/uploads/2025/09/2648924321956055887mainsos_mobilever.mp4"
+              : "https://singledebt.in/wp-content/uploads/2025/09/2190237412106096179sosvid_4_wo_music_.mp4"
+          }
           type="video/mp4"
         />
       </video>
